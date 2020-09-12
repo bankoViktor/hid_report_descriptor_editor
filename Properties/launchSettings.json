@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "HID Report Descriptor Editor": {
+      "commandName": "Project",
+      "commandLineArgs": "hid.hid"
+    },
+    "HID Report Descriptor Export": {
+      "commandName": "Project",
+      "commandLineArgs": "--export hid.hid hid_desc.h"
+    }
+  }
+}
