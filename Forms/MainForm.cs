@@ -316,6 +316,9 @@ namespace HID_Report_Descriptor_Editor.Forms
             // View
             SmViewStatusBar.Checked = isHasMoreOne;
             SmViewReportScheme.Checked = false; // TODO доделать структуру репорта
+
+            StatusBarElementCount.Text = $"Элементов: {ReportItems.Count}";
+            StatusBarByteCount.Text = $"{ReportItems.Sum(i => i.GetBytes().Length)} байт";
         }
 
         private void OpenUrl(string url)
@@ -393,7 +396,7 @@ namespace HID_Report_Descriptor_Editor.Forms
             var dlg = new SaveFileDialog()
             {
                 Title = "Save As ...",
-                Filter = $"Memory Dump (*{Program.FileExtension})|*{Program.FileExtension}",
+                Filter = $"{Program.FileExtensionCaption} (*{Program.FileExtension})|*{Program.FileExtension}",
                 InitialDirectory = Path.GetDirectoryName(Filename),
                 FileName = Path.GetFileName(Filename),
             };
@@ -415,7 +418,7 @@ namespace HID_Report_Descriptor_Editor.Forms
                 var dlg = new OpenFileDialog()
                 {
                     Title = "Open File",
-                    Filter = $"Memory Dump (*{Program.FileExtension})|*{Program.FileExtension}",
+                    Filter = $"{Program.FileExtensionCaption} (*{Program.FileExtension})|*{Program.FileExtension}",
                 };
 
                 if (dlg.ShowDialog() == DialogResult.OK)
@@ -501,6 +504,16 @@ namespace HID_Report_Descriptor_Editor.Forms
         {
             const string url = "https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf";
             OpenUrl(url);
+        }
+
+        private void Command_ToolsRegisterFileExt(object sender, EventArgs e)
+        {
+            FileExtensionApplication.Register();
+        }
+
+        private void Command_ToolsUnregisterFileExt(object sender, EventArgs e)
+        {
+            FileExtensionApplication.Unregister();
         }
 
         #endregion

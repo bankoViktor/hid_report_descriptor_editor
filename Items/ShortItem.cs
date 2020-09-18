@@ -1,6 +1,5 @@
 ﻿using HID_Report_Descriptor_Editor.Attributes;
 using HID_Report_Descriptor_Editor.Enums;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -305,7 +304,7 @@ namespace HID_Report_Descriptor_Editor.Items
 
             foreach (var item in reportItems.Reverse().Skip(reportItems.Count() - currentIndex))
             {
-                if (item.Type == ItemType.Main  )
+                if (item.Type == ItemType.Main)
                 {
                     var mainTag = (ItemTagMain)item.Tag;
                     if (mainTag == ItemTagMain.Collection)

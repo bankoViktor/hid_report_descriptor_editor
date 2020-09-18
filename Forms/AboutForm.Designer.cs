@@ -31,9 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.BtnOK = new System.Windows.Forms.Button();
             this.LabelCR = new System.Windows.Forms.Label();
-            this.LabelAuthor = new System.Windows.Forms.Label();
             this.LabelProductVersion = new System.Windows.Forms.Label();
             this.LabelProductName = new System.Windows.Forms.Label();
+            this.BtnVisitWebSite = new System.Windows.Forms.Button();
+            this.LinkEmail = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // BtnOK
@@ -46,12 +47,8 @@
             // LabelCR
             // 
             resources.ApplyResources(this.LabelCR, "LabelCR");
+            this.LabelCR.BackColor = System.Drawing.Color.Transparent;
             this.LabelCR.Name = "LabelCR";
-            // 
-            // LabelAuthor
-            // 
-            resources.ApplyResources(this.LabelAuthor, "LabelAuthor");
-            this.LabelAuthor.Name = "LabelAuthor";
             // 
             // LabelProductVersion
             // 
@@ -63,14 +60,29 @@
             resources.ApplyResources(this.LabelProductName, "LabelProductName");
             this.LabelProductName.Name = "LabelProductName";
             // 
+            // BtnVisitWebSite
+            // 
+            resources.ApplyResources(this.BtnVisitWebSite, "BtnVisitWebSite");
+            this.BtnVisitWebSite.Name = "BtnVisitWebSite";
+            this.BtnVisitWebSite.UseVisualStyleBackColor = true;
+            this.BtnVisitWebSite.Click += new System.EventHandler(this.BtnVisitWebSite_Click);
+            // 
+            // LinkEmail
+            // 
+            resources.ApplyResources(this.LinkEmail, "LinkEmail");
+            this.LinkEmail.Name = "LinkEmail";
+            this.LinkEmail.TabStop = true;
+            this.LinkEmail.Click += new System.EventHandler(this.LinkEmail_Click);
+            // 
             // AboutForm
             // 
             this.AcceptButton = this.BtnOK;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.LinkEmail);
+            this.Controls.Add(this.BtnVisitWebSite);
             this.Controls.Add(this.LabelProductName);
             this.Controls.Add(this.LabelProductVersion);
-            this.Controls.Add(this.LabelAuthor);
             this.Controls.Add(this.LabelCR);
             this.Controls.Add(this.BtnOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -86,8 +98,9 @@
 
         private System.Windows.Forms.Button BtnOK;
         private System.Windows.Forms.Label LabelCR;
-        private System.Windows.Forms.Label LabelAuthor;
         private System.Windows.Forms.Label LabelProductName;
         private System.Windows.Forms.Label LabelProductVersion;
+        private System.Windows.Forms.Button BtnVisitWebSite;
+        private System.Windows.Forms.LinkLabel LinkEmail;
     }
 }

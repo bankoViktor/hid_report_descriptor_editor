@@ -11,6 +11,7 @@ namespace HID_Report_Descriptor_Editor
     static class Program
     {
         public const string FileExtension = ".hid";
+        public const string FileExtensionCaption = "HID Report Descriptor";
         public const string CmdLinePrefix = "--";
 
         [STAThread]
@@ -39,23 +40,22 @@ namespace HID_Report_Descriptor_Editor
                 }
                 else
                 {
-                    var list = args.ToList();
                     var pos = -1;
-                    if (CheckParam(list, "h", "help", out pos))
+                    if (CheckParam(args, "h", "help", out pos) || CheckParam(args, "help", out pos, null))
                     {
                         const int tabWidth = 5;
                         const int pWidth = 40;
-                        var str = "Help:\n";
+                        var str = "Supported command line arguments:\n";
                         str += "".PadLeft(tabWidth, ' ') + $"{CmdLinePrefix}h | {CmdLinePrefix}help".PadRight(pWidth, ' ') + "Show help for commands.\n";
                         str += "".PadLeft(tabWidth, ' ') + $"{CmdLinePrefix}e | {CmdLinePrefix}export".PadRight(pWidth, ' ') + "Export to C header file.\n";
                         MessageBox.Show(str, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    else if (CheckParam(list, "e", "export", out pos))
+                    else if (CheckParam(args, "e", "export", out pos))
                     {
                         try
                         {
-                            var hidFile = list[pos + 1];
-                            var hdrFile = list[pos + 2];
+                            var hidFile = args[pos + 1];
+                            var hdrFile = args[pos + 2];
 
                             if (IsFileValid(hidFile))
                             {
@@ -96,22 +96,38 @@ namespace HID_Report_Descriptor_Editor
             return false;
         }
 
-        static bool CheckParam(List<string> args, string shortName, string longName, out int position)
+        static bool CheckParam(string[] args, string longName, out int position, string key = CmdLinePrefix)
         {
-            var _short = CmdLinePrefix + shortName;
-            if (args.Contains(_short))
+            return CheckParam(args, null, longName, out position, key);
+        }
+
+        static bool CheckParam(string[] args, string shortName, string longName, out int position, string key = CmdLinePrefix)
+        {
+            if (key == null)
             {
-                position = args.IndexOf(_short);
-                return true;
+                key = string.Empty;
             }
 
-            var _long = CmdLinePrefix + longName;
-            if (args.Contains(_long))
+            if (shortName != null)
             {
-                position = args.IndexOf(_long);
-                return true;
+                var _short = key + shortName;
+                if (args.Contains(_short))
+                {
+                    position = Array.IndexOf(args, _short);
+                    return true;
+                }
             }
 
+            if (longName != null)
+            {
+                var _long = key + longName;
+                if (args.Contains(_long))
+                {
+                    position = Array.IndexOf(args, _long);
+                    return true;
+                }
+            }
+               
             position = -1;
             return false;
         }

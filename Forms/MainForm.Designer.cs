@@ -53,16 +53,23 @@
             this.SmView = new System.Windows.Forms.ToolStripMenuItem();
             this.SmViewStatusBar = new System.Windows.Forms.ToolStripMenuItem();
             this.SmViewReportScheme = new System.Windows.Forms.ToolStripMenuItem();
+            this.SmTools = new System.Windows.Forms.ToolStripMenuItem();
+            this.SmToolsRegisterFileExt = new System.Windows.Forms.ToolStripMenuItem();
+            this.SmToolsUnregisterFileExt = new System.Windows.Forms.ToolStripMenuItem();
             this.SmHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.SmHelpHIDSpec = new System.Windows.Forms.ToolStripMenuItem();
             this.SmHelpHIDUsages = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.SmHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.StatusBarSpring = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusBarElementCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusBarByteCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.ListItemPalet = new System.Windows.Forms.ListView();
             this.ColumnItemName = new System.Windows.Forms.ColumnHeader();
             this.ContextMenuStrip1.SuspendLayout();
             this.MainMenuStrip1.SuspendLayout();
+            this.StatusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ListItems
@@ -130,6 +137,7 @@
             this.SmFile,
             this.SmEdit,
             this.SmView,
+            this.SmTools,
             this.SmHelp});
             this.MainMenuStrip1.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip1.Name = "MainMenuStrip1";
@@ -270,6 +278,29 @@
             this.SmViewReportScheme.Size = new System.Drawing.Size(154, 22);
             this.SmViewReportScheme.Text = "Report Scheme";
             // 
+            // SmTools
+            // 
+            this.SmTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SmToolsRegisterFileExt,
+            this.SmToolsUnregisterFileExt});
+            this.SmTools.Name = "SmTools";
+            this.SmTools.Size = new System.Drawing.Size(46, 20);
+            this.SmTools.Text = "Tools";
+            // 
+            // SmToolsRegisterFileExt
+            // 
+            this.SmToolsRegisterFileExt.Name = "SmToolsRegisterFileExt";
+            this.SmToolsRegisterFileExt.Size = new System.Drawing.Size(201, 22);
+            this.SmToolsRegisterFileExt.Text = "Register file extension";
+            this.SmToolsRegisterFileExt.Click += new System.EventHandler(this.Command_ToolsRegisterFileExt);
+            // 
+            // SmToolsUnregisterFileExt
+            // 
+            this.SmToolsUnregisterFileExt.Name = "SmToolsUnregisterFileExt";
+            this.SmToolsUnregisterFileExt.Size = new System.Drawing.Size(201, 22);
+            this.SmToolsUnregisterFileExt.Text = "Unregister file extension";
+            this.SmToolsUnregisterFileExt.Click += new System.EventHandler(this.Command_ToolsUnregisterFileExt);
+            // 
             // SmHelp
             // 
             this.SmHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -309,11 +340,35 @@
             // 
             // StatusStrip1
             // 
+            this.StatusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.StatusBarSpring,
+            this.StatusBarElementCount,
+            this.StatusBarByteCount});
             this.StatusStrip1.Location = new System.Drawing.Point(0, 660);
             this.StatusStrip1.Name = "StatusStrip1";
             this.StatusStrip1.Size = new System.Drawing.Size(881, 22);
             this.StatusStrip1.TabIndex = 4;
             this.StatusStrip1.Text = "statusStrip1";
+            // 
+            // StatusBarSpring
+            // 
+            this.StatusBarSpring.Name = "StatusBarSpring";
+            this.StatusBarSpring.Size = new System.Drawing.Size(566, 17);
+            this.StatusBarSpring.Spring = true;
+            // 
+            // StatusBarElementCount
+            // 
+            this.StatusBarElementCount.AutoSize = false;
+            this.StatusBarElementCount.Name = "StatusBarElementCount";
+            this.StatusBarElementCount.Size = new System.Drawing.Size(150, 17);
+            this.StatusBarElementCount.Text = "StatusBarElementCount";
+            // 
+            // StatusBarByteCount
+            // 
+            this.StatusBarByteCount.AutoSize = false;
+            this.StatusBarByteCount.Name = "StatusBarByteCount";
+            this.StatusBarByteCount.Size = new System.Drawing.Size(150, 17);
+            this.StatusBarByteCount.Text = "StatusBarByteCount";
             // 
             // ListItemPalet
             // 
@@ -355,6 +410,8 @@
             this.ContextMenuStrip1.ResumeLayout(false);
             this.MainMenuStrip1.ResumeLayout(false);
             this.MainMenuStrip1.PerformLayout();
+            this.StatusStrip1.ResumeLayout(false);
+            this.StatusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -393,6 +450,12 @@
         private System.Windows.Forms.ToolStripMenuItem SmHelpHIDUsages;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem SmHelpAbout;
+        private System.Windows.Forms.ToolStripMenuItem SmTools;
+        private System.Windows.Forms.ToolStripMenuItem SmToolsRegisterFileExt;
+        private System.Windows.Forms.ToolStripMenuItem SmToolsUnregisterFileExt;
+        private System.Windows.Forms.ToolStripStatusLabel StatusBarSpring;
+        private System.Windows.Forms.ToolStripStatusLabel StatusBarElementCount;
+        private System.Windows.Forms.ToolStripStatusLabel StatusBarByteCount;
     }
 }
 

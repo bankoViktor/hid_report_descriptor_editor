@@ -6,13 +6,33 @@
     <RootNamespace>HID_Report_Descriptor_Editor</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <Version>0.1.0</Version>
-    <Authors>Banko Viktor S.</Authors>
+    <Authors>Banko Viktor S</Authors>
     <Product>HID Report Descriptor Editor</Product>
-    <Description>The editor for construct and control a Report Descriptor of Universal Serial Bus (USB) class Human Interface Device (HID).</Description>
-    <Copyright>Banko Viktor S.</Copyright>
+    <Description>The editor for construct and control a Report Descriptor of Universal Serial Bus (USB) class Human Interface Device (HID). 
+bankviktor14@gmail.com</Description>
+    <Copyright>Banko Viktor S</Copyright>
     <PackageTags>USB;HID;Report Descriptor;</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://bitbucket.org/MrWinston34/hid_report_descriptor_editor/</RepositoryUrl>
+    <ApplicationIcon>appIcon.ico</ApplicationIcon>
+    <Company>Banko Viktor S</Company>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 
 </Project>

@@ -63,7 +63,7 @@
   </data>
   <assembly alias="System.Drawing.Primitives" name="System.Drawing.Primitives, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="BtnOK.Location" type="System.Drawing.Point, System.Drawing.Primitives">
-    <value>291, 128</value>
+    <value>267, 123</value>
   </data>
   <data name="BtnOK.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>77, 25</value>
@@ -85,25 +85,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BtnOK.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="LabelCR.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+    <value>5</value>
   </data>
   <data name="LabelCR.AutoSize" type="System.Boolean, System.Private.CoreLib">
     <value>True</value>
   </data>
   <data name="LabelCR.Location" type="System.Drawing.Point, System.Drawing.Primitives">
-    <value>25, 133</value>
+    <value>25, 79</value>
   </data>
   <data name="LabelCR.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>45, 15</value>
+    <value>127, 15</value>
   </data>
   <data name="LabelCR.TabIndex" type="System.Int32, System.Private.CoreLib">
     <value>2</value>
   </data>
   <data name="LabelCR.Text" xml:space="preserve">
-    <value>© 2020</value>
+    <value>© 2020 Banko Viktor S.</value>
   </data>
   <data name="&gt;&gt;LabelCR.Name" xml:space="preserve">
     <value>LabelCR</value>
@@ -115,34 +112,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LabelCR.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="LabelAuthor.AutoSize" type="System.Boolean, System.Private.CoreLib">
-    <value>True</value>
-  </data>
-  <data name="LabelAuthor.Location" type="System.Drawing.Point, System.Drawing.Primitives">
-    <value>25, 78</value>
-  </data>
-  <data name="LabelAuthor.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>44, 15</value>
-  </data>
-  <data name="LabelAuthor.TabIndex" type="System.Int32, System.Private.CoreLib">
-    <value>1</value>
-  </data>
-  <data name="LabelAuthor.Text" xml:space="preserve">
-    <value>Author</value>
-  </data>
-  <data name="&gt;&gt;LabelAuthor.Name" xml:space="preserve">
-    <value>LabelAuthor</value>
-  </data>
-  <data name="&gt;&gt;LabelAuthor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LabelAuthor.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LabelAuthor.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="LabelProductVersion.AutoSize" type="System.Boolean, System.Private.CoreLib">
     <value>True</value>
@@ -169,7 +139,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LabelProductVersion.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="LabelProductName.AutoSize" type="System.Boolean, System.Private.CoreLib">
     <value>True</value>
@@ -200,6 +170,60 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LabelProductName.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="BtnVisitWebSite.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="BtnVisitWebSite.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>157, 123</value>
+  </data>
+  <data name="BtnVisitWebSite.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>104, 25</value>
+  </data>
+  <data name="BtnVisitWebSite.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>4</value>
+  </data>
+  <data name="BtnVisitWebSite.Text" xml:space="preserve">
+    <value>Visit Website</value>
+  </data>
+  <data name="&gt;&gt;BtnVisitWebSite.Name" xml:space="preserve">
+    <value>BtnVisitWebSite</value>
+  </data>
+  <data name="&gt;&gt;BtnVisitWebSite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnVisitWebSite.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BtnVisitWebSite.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="LinkEmail.AutoSize" type="System.Boolean, System.Private.CoreLib">
+    <value>True</value>
+  </data>
+  <data name="LinkEmail.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>158, 79</value>
+  </data>
+  <data name="LinkEmail.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>143, 15</value>
+  </data>
+  <data name="LinkEmail.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>5</value>
+  </data>
+  <data name="LinkEmail.Text" xml:space="preserve">
+    <value>bankviktor14@gmail.com</value>
+  </data>
+  <data name="&gt;&gt;LinkEmail.Name" xml:space="preserve">
+    <value>LinkEmail</value>
+  </data>
+  <data name="&gt;&gt;LinkEmail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LinkEmail.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LinkEmail.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
@@ -209,7 +233,7 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>380, 165</value>
+    <value>356, 160</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
