@@ -392,15 +392,6 @@ namespace HID_Report_Descriptor_Editor.Utils
         /// </summary>
         public const string ExtPreviewHandler = "{8895b1c6-b41f-4c1c-a562-0d564250836f}";
 
-        #region Свойсва 
-
-        enum PropSystem
-        {
-            FileDescription,
-        }
-
-        #endregion
-
         /// <summary>
         /// Зарегистрировать тип файла.
         /// </summary>
@@ -462,7 +453,7 @@ namespace HID_Report_Descriptor_Editor.Utils
             Extension = Program.FileExtension,
             Description = Program.FileExtensionCaption,
             InfoTip = "prop:FileDescription;Company;FileVersion;Create;Size",
-            DefaultIcon = $"{Process.GetCurrentProcess().MainModule.FileName},{1}", // TODO иконка типа файла
+            DefaultIcon = $"{Process.GetCurrentProcess().MainModule.FileName},-{2}", // TODO иконка типа файла
             Verbs = new Verb[]
                 {
                     new Verb("open", $"{Process.GetCurrentProcess().MainModule.FileName} %1")

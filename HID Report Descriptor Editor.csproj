@@ -16,8 +16,9 @@ bankviktor14@gmail.com</Description>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://bitbucket.org/MrWinston34/hid_report_descriptor_editor/</RepositoryUrl>
-    <ApplicationIcon>appIcon.ico</ApplicationIcon>
+    <ApplicationIcon></ApplicationIcon>
     <Company>Banko Viktor S</Company>
+    <Win32Resource>D:\source\repos\hid_report_descriptor_editor\Resources\win32_resource.res</Win32Resource>
   </PropertyGroup>
 
   <ItemGroup>

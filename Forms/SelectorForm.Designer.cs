@@ -110,6 +110,8 @@
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnOK);
             this.Name = "SelectorForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Type";
             this.ResumeLayout(false);

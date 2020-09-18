@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ListItems = new System.Windows.Forms.ListView();
             this.ColumnItem = new System.Windows.Forms.ColumnHeader();
             this.ColumnHex = new System.Windows.Forms.ColumnHeader();
@@ -403,6 +404,7 @@
             this.Controls.Add(this.StatusStrip1);
             this.Controls.Add(this.ListItems);
             this.Controls.Add(this.MainMenuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HID Report Descriptor Editor";

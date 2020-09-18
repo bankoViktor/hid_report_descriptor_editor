@@ -62,6 +62,8 @@
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnOK);
             this.Name = "InputForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "InputForm";
             this.ResumeLayout(false);
 
