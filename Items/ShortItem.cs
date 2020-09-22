@@ -1,5 +1,6 @@
 ﻿using HID_Report_Descriptor_Editor.Attributes;
 using HID_Report_Descriptor_Editor.Enums;
+using HID_Report_Descriptor_Editor.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Reflection;
 
 namespace HID_Report_Descriptor_Editor.Items
 {
-    [DebuggerDisplay("{Name,nq} ({ValueDebug,nq})")]
+    [DebuggerDisplay("{Name,nq} {{ {BytesString,nq} }}")]
     public class ShortItem
     {
         private const int OffsetWidth = 4;
@@ -27,11 +28,8 @@ namespace HID_Report_Descriptor_Editor.Items
                 return str[0..^1];
             }
         }
+        
         public string Name { get => GetEnumDescription(Tag); }
-        private string ValueDebug
-        {
-            get => Value != null ? $"0x{Convert.ChangeType(Value, typeof(short)):X}" : "NULL";
-        }
 
         #region Constructors
 
@@ -213,13 +211,17 @@ namespace HID_Report_Descriptor_Editor.Items
                 switch (tagMain)
                 {
                     case ItemTagMain.Input:
+                        var bits1 = GetMainDescription((int)item.Value).ToList();
+                        bits1.RemoveAt(7);
+                        _value = bits1.Aggregate((c, n) => $"{c},{n}");
                         break;
                     case ItemTagMain.Output:
+                    case ItemTagMain.Feature:
+                        var bits2 = GetMainDescription((int)item.Value);
+                        _value = bits2.Aggregate((c, n) => $"{c},{n}");
                         break;
                     case ItemTagMain.Collection:
                         _value = GetEnumDescription((CollectionType)item.Value);
-                        break;
-                    case ItemTagMain.Feature:
                         break;
                     case ItemTagMain.EndCollection:
                         countCollection--;
@@ -296,6 +298,22 @@ namespace HID_Report_Descriptor_Editor.Items
             }
 
             return result;
+        }
+
+        private static string[] GetMainDescription(int value)
+        {
+            return new string[]
+            {
+                BitOperations.IsSetBit(value, 0) ? "Const" : "Data",
+                BitOperations.IsSetBit(value, 1) ? "Var" : "Array",
+                BitOperations.IsSetBit(value, 2) ? "Rel" : "Abs",
+                BitOperations.IsSetBit(value, 3) ? "Wrap" : "NoWrap",
+                BitOperations.IsSetBit(value, 4) ? "NoLinear" : "Linear",
+                BitOperations.IsSetBit(value, 5) ? "NoPref" : "Pref",
+                BitOperations.IsSetBit(value, 6) ? "Null" : "NotNull",
+                BitOperations.IsSetBit(value, 7) ? "Valatile" : "NotValatile",
+                BitOperations.IsSetBit(value, 8) ? "Buff" : "BitField",
+            };
         }
 
         private static int GetTopCollection(IEnumerable<ShortItem> reportItems, int currentIndex)

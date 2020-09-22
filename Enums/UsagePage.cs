@@ -31,12 +31,15 @@ namespace HID_Report_Descriptor_Editor.Enums
         GenericDeviceControls = 0x0006,
 
         [Description("Keyboard/Keypad")]
+        [UsagePage(typeof(UsageKeyboard_Keypad))]
         Keyboard_Keypad = 0x0007,
 
         [Description("LEDs")]
+        [UsagePage(typeof(UsageLEDs))]
         LEDs = 0x0008,
 
-        [Description("Button")]
+        [Description("Buttons")]
+        [UsagePage(typeof(UsageButtons))]
         Button = 0x0009,
 
         [Description("Ordinal")]

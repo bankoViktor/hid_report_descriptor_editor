@@ -30,8 +30,8 @@ namespace HID_Report_Descriptor_Editor.Forms
                 Text = $"{Application.ProductName} - [{(IsModified ? "*" : "")}{Path.GetFileName(Filename)}]";
             }
         }
-        public int LastSelIndex { get; set; } = -1;
-
+        
+        #region Constructors
 
         public MainForm(string filename)
         {
@@ -61,6 +61,10 @@ namespace HID_Report_Descriptor_Editor.Forms
                 .ToArray());
         }
 
+        #endregion
+
+        #region List View Group
+
         private static readonly ListViewGroup[] GroupCollection =
         {
             new ListViewGroup("Main"),
@@ -78,6 +82,10 @@ namespace HID_Report_Descriptor_Editor.Forms
                 _ => null,
             };
         }
+
+        #endregion
+
+        #region File Operations
 
         private void CreateFile(string filename)
         {
@@ -138,6 +146,8 @@ namespace HID_Report_Descriptor_Editor.Forms
             writer.Close();
         }
 
+        #endregion
+
         private void AddReportItem(ShortItem item)
         {
             if (DoDialog(item, out IDialogValue dlg))
@@ -172,19 +182,22 @@ namespace HID_Report_Descriptor_Editor.Forms
                 switch (tagMain)
                 {
                     case ItemTagMain.Collection:
-                        dlg = new CollectionForm();
+                        dlg = new CollectionForm() { Text = ShortItem.GetEnumDescription(tagMain) };
                         return true;
 
                     case ItemTagMain.Input:
                     case ItemTagMain.Output:
                     case ItemTagMain.Feature:
-                        dlg = new InputForm();
+                        dlg = new InputForm(tagMain) { Text = ShortItem.GetEnumDescription(tagMain) };
                         return true;
 
                     case ItemTagMain.EndCollection:
                         var currentCollection = GetCurrentCollection();
                         if (currentCollection == null)
-                            MessageBox.Show("Not matching Collection statrt.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        {
+                            MessageBox.Show("Not matching Collection statrt.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
+                        }
                         return true;
                 }
             }
@@ -193,7 +206,7 @@ namespace HID_Report_Descriptor_Editor.Forms
                 switch (tagGlobal)
                 {
                     case ItemTagGlobal.UsagePage:
-                        dlg = new SelectorForm(typeof(UsagePage)) { Caption = "Select Usage Page" };
+                        dlg = new SelectUsagePageForm() { Text = ShortItem.GetEnumDescription(tagGlobal) };
                         return true;
 
                     case ItemTagGlobal.LogicalMinimum:
@@ -202,16 +215,16 @@ namespace HID_Report_Descriptor_Editor.Forms
                     case ItemTagGlobal.PhysicalMaximum:
                     case ItemTagGlobal.ReportSize:
                     case ItemTagGlobal.ReportCount:
-                        dlg = new NumberInputForm(0x00000000, 0xFFFFFFFF);
+                        dlg = new NumberInputForm(0x00000000, 0xFFFFFFFF) { Text = ShortItem.GetEnumDescription(tagGlobal) };
                         return true;
 
                     case ItemTagGlobal.UnitExponent:
                     case ItemTagGlobal.Unit:
                         MessageBox.Show("Not Implemented.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return true;
+                        return false;
 
                     case ItemTagGlobal.ReportID: // 1 byte
-                        dlg = new NumberInputForm(0x00, 0xFF);
+                        dlg = new NumberInputForm(0x00, 0xFF) { Text = ShortItem.GetEnumDescription(tagGlobal) };
                         return true;
 
                     case ItemTagGlobal.Push:
@@ -233,13 +246,19 @@ namespace HID_Report_Descriptor_Editor.Forms
                             if (upType != null)
                             {
                                 var usagePageName = ShortItem.GetEnumDescription(topUsagePage);
-                                dlg = new SelectorForm(upType) { Caption = $"USAGE PAGE: {usagePageName} (0x{(int)topUsagePage,4:X4})" };
+                                dlg = new SelectUsageForm(upType)
+                                {
+                                    Text = string.Format("{0} from {1} (0x{2:X4})", 
+                                        ShortItem.GetEnumDescription(tagLocal), usagePageName, (int)topUsagePage),
+                                };
                                 return true;
                             }
+                            else
+                                MessageBox.Show($"A set Usages for Usage Page \"{ShortItem.GetEnumDescription(topUsagePage.Value)}\" don't defined.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
-                            MessageBox.Show("You mast define a Usage Page before selecting a Usage.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
+                            MessageBox.Show("You must define a Usage Page before selecting a Usage.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
 
                     case ItemTagLocal.DesignatorIndex:
                     case ItemTagLocal.DesignatorMinimum:
@@ -247,11 +266,11 @@ namespace HID_Report_Descriptor_Editor.Forms
                     case ItemTagLocal.StringIndex:
                     case ItemTagLocal.StringMinimum:
                     case ItemTagLocal.StringMaximum:
-                        dlg = new NumberInputForm(0x00000000, 0xFFFFFFFF);
+                        dlg = new NumberInputForm(0x00000000, 0xFFFFFFFF) { Text = ShortItem.GetEnumDescription(tagLocal) };
                         return true;
 
                     case ItemTagLocal.Delimiter:
-                        dlg = new DelimeterForm();
+                        dlg = new DelimeterForm() { Text = ShortItem.GetEnumDescription(tagLocal) };
                         return true;
                 }
             }

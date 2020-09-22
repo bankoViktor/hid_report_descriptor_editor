@@ -10,17 +10,20 @@ namespace HID_Report_Descriptor_Editor.Forms
         {
             get
             {
-                return (int)Controls
-                    .Cast<RadioButton>()
+                return int.Parse(Controls
+                    .OfType<RadioButton>()
                     .Where(rb => rb.Checked)
-                    .Single().Tag;
+                    .Single().Tag as string);
             }
             set
             {
-                Controls
-                    .Cast<RadioButton>()
-                    .Where(rb => (int)rb.Tag == (int)value)
-                    .Single().Checked = true;
+                if (value != null)
+                {
+                    Controls
+                        .OfType<RadioButton>()
+                        .Where(rb => int.Parse(rb.Tag as string) == (int)value)
+                        .Single().Checked = true;
+                }
             }
         }
         public string Caption { get; set; }

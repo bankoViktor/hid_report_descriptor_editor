@@ -1,4 +1,6 @@
 ﻿using HID_Report_Descriptor_Editor.Utils;
+using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace HID_Report_Descriptor_Editor.Forms
@@ -7,7 +9,21 @@ namespace HID_Report_Descriptor_Editor.Forms
     {
         private uint MinValue { get; }
         private uint MaxValue { get; }
-        public object Value { get => int.Parse(textBox1.Text); set => textBox1.Text = value != null ? value.ToString() : "0"; }
+        public object Value
+        {
+            get
+            {
+                throw new NotImplementedException();
+                //var converter = new Int64Converter();
+                //if (converter.CanConvertFrom(typeof(string)))
+                //{
+
+                //}
+                //else
+                //    return null; Int64Converter.Parse(TbValue.Text);
+            }
+            set => TbValue.Text = value != null ? value.ToString() : "0"; 
+        }
         public string Caption { get; set; }
 
         public NumberInputForm(uint min, uint max)
@@ -16,8 +32,8 @@ namespace HID_Report_Descriptor_Editor.Forms
             MinValue = min;
             MaxValue = max;
 
-            textBox1.Text = "0";
-            textBox1.Select();
+            TbValue.Text = "0";
+            TbValue.Select();
         }
 
         private void CheckedChanged(object sender, System.EventArgs e)
@@ -25,7 +41,7 @@ namespace HID_Report_Descriptor_Editor.Forms
 
         }
 
-        private void TextBox1_TextChanged(object sender, System.EventArgs e)
+        private void TbValue_TextChanged(object sender, System.EventArgs e)
         {
             //BtnOK.Enabled = !string.IsNullOrWhiteSpace(textBox1.Text) && int.TryParse(textBox1.Text, out int result);
         }

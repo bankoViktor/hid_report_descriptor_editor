@@ -11,12 +11,10 @@ namespace HID_Report_Descriptor_Editor.Forms
             LabelProductName.Text = Application.ProductName;
             LabelProductVersion.Text = "v" + Application.ProductVersion;
         }
-        //const string RepositoryURL = "";
 
         private void BtnVisitWebSite_Click(object sender, System.EventArgs e)
         {
-            var url = "";
-            Process.Start(new ProcessStartInfo("cmd", $"/c start {url}")
+            Process.Start(new ProcessStartInfo("cmd", $"/c start {Program.UrlRepository}")
             {
                 CreateNoWindow = true
             });

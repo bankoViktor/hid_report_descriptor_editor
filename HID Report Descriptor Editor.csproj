@@ -22,6 +22,12 @@ bankviktor14@gmail.com</Description>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Update="Forms\CommentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\SelectUsagePageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

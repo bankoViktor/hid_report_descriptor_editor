@@ -5,7 +5,7 @@
     },
     "Run File": {
       "commandName": "Project",
-      "commandLineArgs": "\"hid_report.hid\""
+      "commandLineArgs": "\"keyboard.hid\""
     },
     "Run Export": {
       "commandName": "Project",

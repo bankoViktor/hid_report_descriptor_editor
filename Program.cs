@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace HID_Report_Descriptor_Editor
@@ -13,10 +14,16 @@ namespace HID_Report_Descriptor_Editor
         public const string FileExtension = ".hid";
         public const string FileExtensionCaption = "HID Report Descriptor";
         public const string CmdLinePrefix = "--";
+        public const string UrlRepository = "https://bitbucket.org/MrWinston34/hid_report_descriptor_editor/";
 
         [STAThread]
         static void Main(string[] args)
         {
+            // TODO локализация
+            var culture = System.Globalization.CultureInfo.GetCultureInfo("ru-RU"); ;
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
