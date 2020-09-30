@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace HID_Report_Descriptor_Editor.Enums.UsagePages
 {
-    public enum UsageGenericDesktop
+    public enum UsageGenericDesktop : ushort
     {
         // ширина 2 байта
         [Description("Undefined")]

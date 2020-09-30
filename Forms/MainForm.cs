@@ -1,21 +1,27 @@
-﻿using HID_Report_Descriptor_Editor.Enums;
+﻿using HID_Report_Descriptor_Editor.Attributes;
+using HID_Report_Descriptor_Editor.Enums;
 using HID_Report_Descriptor_Editor.Items;
 using HID_Report_Descriptor_Editor.Utils;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Serialization;
+using static System.Windows.Forms.ListViewItem;
 
 namespace HID_Report_Descriptor_Editor.Forms
 {
     public partial class MainForm : Form
     {
+        private readonly Color NumberColor = Color.FromArgb(0xFF8000);
+        private readonly Color CommentColor = Color.FromArgb(0x008000);
+
         private bool _isModified;
 
-        private List<ShortItem> ReportItems { get; set; }
+        private HIDReportItemCollection ReportItems { get; set; }
         private string Filename { get; set; }
         private bool IsNewFile { get; set; }
         private bool IsModified
@@ -27,10 +33,11 @@ namespace HID_Report_Descriptor_Editor.Forms
             set
             {
                 _isModified = value;
-                Text = $"{Application.ProductName} - [{(IsModified ? "*" : "")}{Path.GetFileName(Filename)}]";
+                Text = $"{Application.ProductName} - [{(IsModified ? "*" : "")}{Filename}]";
             }
         }
-        
+        public static XmlSerializer Serializer { get; } = new XmlSerializer(typeof(HIDReportItemCollection));
+
         #region Constructors
 
         public MainForm(string filename)
@@ -52,12 +59,11 @@ namespace HID_Report_Descriptor_Editor.Forms
         private void Initialize()
         {
             InitializeComponent();
-            ListItemPalet.DoubleBuffering(true);
-            ListItems.DoubleBuffering(true);
-
-            ListItemPalet.Groups.AddRange(GroupCollection);
-            ListItemPalet.Items.AddRange(ShortItem.ShortItemsCollection
-                .Select(i => new ListViewItem(i.Name, GetLVGroup(i.Type)) { Tag = i })
+            ListPaletteItems.DoubleBuffering(true);
+            ListReportItems.DoubleBuffering(true);
+            ListPaletteItems.Groups.AddRange(GroupCollection);
+            ListPaletteItems.Items.AddRange(HIDReportHeader.ShortItemHeaders
+                .Select(item => new ListViewItem(item.ToString(), GetLVGroup(item.Type)) { Tag = item })
                 .ToArray());
         }
 
@@ -90,242 +96,240 @@ namespace HID_Report_Descriptor_Editor.Forms
         private void CreateFile(string filename)
         {
             Filename = filename;
-            ReportItems = new List<ShortItem>();
+            ReportItems = new HIDReportItemCollection();
             IsModified = false;
             IsNewFile = true;
         }
 
         private void OpenFile(string filename)
         {
-            Filename = filename;
+            var reports = Open(filename);
+            if (reports != null)
+            {
+                ReportItems = reports;
+                Filename = filename;
+            }
+            else
+            {
+                ReportItems = new HIDReportItemCollection();
+            }
             IsModified = false;
-            ReportItems = LoadFile(filename);
             UpdateListView();
         }
 
-        public static List<ShortItem> LoadFile(string filename)
+        public static HIDReportItemCollection Open(string filename)
         {
-            var result = new List<ShortItem>();
-            var reader = new BinaryReader(File.OpenRead(filename));
-
-            while (reader.BaseStream.Position < reader.BaseStream.Length)
+            using var file = File.OpenRead(filename);
+            try
             {
-                var _byte = reader.ReadByte();
-
-                var size = (ItemSize)(_byte & 0x03);
-                var type = (ItemType)((_byte & 0x0C) >> 2);
-                var tag = (_byte & 0xF0) >> 4;
-
-                object value = size switch
-                {
-                    ItemSize.Byte => (int)reader.ReadByte(),
-                    ItemSize.Word => (int)reader.ReadInt16(),
-                    ItemSize.DWord => reader.ReadInt32(),
-                    ItemSize.Null => null,
-                    _ => null,
-                };
-
-                result.Add(new ShortItem(type, tag, value));
+                return Serializer.Deserialize(file) as HIDReportItemCollection;
             }
-
-            reader.Close();
-
-            return result;
+            catch (Exception)
+            {
+                MessageBox.Show("This file format is not supported.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
-        private void Save(string filename)
+        private static void Save(string filename, HIDReportItemCollection items)
         {
-            var writer = new BinaryWriter(File.Open(filename, FileMode.Create));
-
-            foreach (var item in ReportItems)
-            {
-                var bytes = item.GetBytes();
-                writer.Write(bytes, 0, bytes.Length);
-            }
-
-            writer.Close();
+            using var file = File.Open(filename, FileMode.Create);
+            Serializer.Serialize(file, items);
         }
 
         #endregion
 
-        private void AddReportItem(ShortItem item)
+        private bool ShowEditDialog(ShortItem reportItem)
         {
-            if (DoDialog(item, out IDialogValue dlg))
+            var result = false;
+
+            if (DoDialog(reportItem, out IDialogValue dlg))
             {
-                if (dlg == null)
+                if (dlg != null)
                 {
-                    item.Value = null;
-                    IsModified = true;
-                    ReportItems.Add(item);
+                    dlg.Value = reportItem.Value;
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        reportItem.Value = dlg.Value;
+                        result = true;
+                    }
                 }
                 else
                 {
-                    dlg.Value = item.Value;
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                    {
-                        item.Value = (int)dlg.Value;
-                        IsModified = true;
-                        ReportItems.Add(item);
-                    }
+                    reportItem.Value = null;
+                    result = true;
                 }
             }
 
-            UpdateListView();
+            return result;
         }
 
-        private bool DoDialog(ShortItem item, out IDialogValue dlg)
+        private bool DoDialog(ShortItem reportItem, out IDialogValue dlg)
         {
             dlg = null;
 
-            if (item.Tag is ItemTagMain tagMain)
+            switch (reportItem.Header.Type)
             {
-                switch (tagMain)
-                {
-                    case ItemTagMain.Collection:
-                        dlg = new CollectionForm() { Text = ShortItem.GetEnumDescription(tagMain) };
-                        return true;
+                case ItemType.Main:
+                    var tagMain = (ItemTagMain)reportItem.Header.Tag;
+                    switch (tagMain)
+                    {
+                        case ItemTagMain.Collection:
+                            dlg = new CollectionForm() { Text = EnumHelper.GetEnumDescription(tagMain) };
+                            return true;
 
-                    case ItemTagMain.Input:
-                    case ItemTagMain.Output:
-                    case ItemTagMain.Feature:
-                        dlg = new InputForm(tagMain) { Text = ShortItem.GetEnumDescription(tagMain) };
-                        return true;
+                        case ItemTagMain.Input:
+                        case ItemTagMain.Output:
+                        case ItemTagMain.Feature:
+                            dlg = new InputForm(tagMain) { Text = EnumHelper.GetEnumDescription(tagMain) };
+                            return true;
 
-                    case ItemTagMain.EndCollection:
-                        var currentCollection = GetCurrentCollection();
-                        if (currentCollection == null)
-                        {
-                            MessageBox.Show("Not matching Collection statrt.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return false;
-                        }
-                        return true;
-                }
-            }
-            else if (item.Tag is ItemTagGlobal tagGlobal)
-            {
-                switch (tagGlobal)
-                {
-                    case ItemTagGlobal.UsagePage:
-                        dlg = new SelectUsagePageForm() { Text = ShortItem.GetEnumDescription(tagGlobal) };
-                        return true;
-
-                    case ItemTagGlobal.LogicalMinimum:
-                    case ItemTagGlobal.LogicalMaximum:
-                    case ItemTagGlobal.PhysicalMinimum:
-                    case ItemTagGlobal.PhysicalMaximum:
-                    case ItemTagGlobal.ReportSize:
-                    case ItemTagGlobal.ReportCount:
-                        dlg = new NumberInputForm(0x00000000, 0xFFFFFFFF) { Text = ShortItem.GetEnumDescription(tagGlobal) };
-                        return true;
-
-                    case ItemTagGlobal.UnitExponent:
-                    case ItemTagGlobal.Unit:
-                        MessageBox.Show("Not Implemented.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-
-                    case ItemTagGlobal.ReportID: // 1 byte
-                        dlg = new NumberInputForm(0x00, 0xFF) { Text = ShortItem.GetEnumDescription(tagGlobal) };
-                        return true;
-
-                    case ItemTagGlobal.Push:
-                    case ItemTagGlobal.Pop:
-                        return true;
-                }
-            }
-            else if (item.Tag is ItemTagLocal tagLocal)
-            {
-                switch (tagLocal)
-                {
-                    case ItemTagLocal.Usage:
-                    case ItemTagLocal.UsageMinimum:
-                    case ItemTagLocal.UsageMaximum:
-                        var topUsagePage = ShortItem.GetTopUsagePage(ReportItems, GetBaseIndex());
-                        if (topUsagePage.HasValue && topUsagePage.Value != UsagePage.Undefined)
-                        {
-                            var upType = ShortItem.GetUsagePageType(topUsagePage.Value);
-                            if (upType != null)
+                        case ItemTagMain.EndCollection:
+                            var originItem = ListReportItems.Items.Count;
+                            if (ReportItems.GetOpenCollectionCount(originItem) == 0)
                             {
-                                var usagePageName = ShortItem.GetEnumDescription(topUsagePage);
-                                dlg = new SelectUsageForm(upType)
+                                MessageBox.Show("Not matching Collection statrt.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return false;
+                            }
+                            return true;
+                    }
+                    break;
+
+                case ItemType.Global:
+                    var tagGlobal = (ItemTagGlobal)reportItem.Header.Tag;
+                    switch (tagGlobal)
+                    {
+                        case ItemTagGlobal.UsagePage:
+                            dlg = new SelectUsagePageForm() { Text = EnumHelper.GetEnumDescription(tagGlobal) };
+                            return true;
+
+                        case ItemTagGlobal.LogicalMinimum:
+                        case ItemTagGlobal.LogicalMaximum:
+                        case ItemTagGlobal.PhysicalMinimum:
+                        case ItemTagGlobal.PhysicalMaximum:
+                        case ItemTagGlobal.ReportSize:
+                        case ItemTagGlobal.ReportCount:
+                            dlg = new NumberInputForm(0x00000000, 0xFFFFFFFF) { Text = EnumHelper.GetEnumDescription(tagGlobal) };
+                            return true;
+
+                        case ItemTagGlobal.UnitExponent:
+                        case ItemTagGlobal.Unit:
+                            MessageBox.Show("Not Implemented.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+
+                        case ItemTagGlobal.ReportID: // 1 byte
+                            dlg = new NumberInputForm(0x00, 0xFF) { Text = EnumHelper.GetEnumDescription(tagGlobal) };
+                            return true;
+
+                        case ItemTagGlobal.Push:
+                        case ItemTagGlobal.Pop:
+                            return true;
+                    }
+                    break;
+
+                case ItemType.Local:
+                    var tagLocal = (ItemTagLocal)reportItem.Header.Tag;
+                    switch (tagLocal)
+                    {
+                        case ItemTagLocal.Usage:
+                        case ItemTagLocal.UsageMinimum:
+                        case ItemTagLocal.UsageMaximum:
+                            var originIndex = ListReportItems.SelectedItems.Count > 0
+                                ? ListReportItems.SelectedItems.Cast<ListViewItem>().Max(i => i.Index)
+                                : ReportItems.Count;
+                            var topUsagePage = ReportItems.GetTopUsagePage(originIndex);
+                            if (topUsagePage.HasValue)
+                            {
+                                var upType = topUsagePage.GetAttributeOfType<UsagePageAttribute>()?.UsageType;
+                                if (upType != null)
                                 {
-                                    Text = string.Format("{0} from {1} (0x{2:X4})", 
-                                        ShortItem.GetEnumDescription(tagLocal), usagePageName, (int)topUsagePage),
-                                };
-                                return true;
+                                    var usagePageName = EnumHelper.GetEnumDescription(topUsagePage);
+                                    dlg = new SelectUsageForm(upType)
+                                    {
+                                        Text = string.Format("{0} from {1} (0x{2:X4})",
+                                            EnumHelper.GetEnumDescription(tagLocal), usagePageName, (int)topUsagePage),
+                                    };
+                                    return true;
+                                }
+                                else
+                                    MessageBox.Show($"A set Usages for Usage Page \"{EnumHelper.GetEnumDescription(topUsagePage.Value)}\" don't defined.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                             else
-                                MessageBox.Show($"A set Usages for Usage Page \"{ShortItem.GetEnumDescription(topUsagePage.Value)}\" don't defined.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                            MessageBox.Show("You must define a Usage Page before selecting a Usage.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return false;
+                                MessageBox.Show("You must define a Usage Page before selecting a Usage.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
 
-                    case ItemTagLocal.DesignatorIndex:
-                    case ItemTagLocal.DesignatorMinimum:
-                    case ItemTagLocal.DesignatorMaximum:
-                    case ItemTagLocal.StringIndex:
-                    case ItemTagLocal.StringMinimum:
-                    case ItemTagLocal.StringMaximum:
-                        dlg = new NumberInputForm(0x00000000, 0xFFFFFFFF) { Text = ShortItem.GetEnumDescription(tagLocal) };
-                        return true;
+                        case ItemTagLocal.DesignatorIndex:
+                        case ItemTagLocal.DesignatorMinimum:
+                        case ItemTagLocal.DesignatorMaximum:
+                        case ItemTagLocal.StringIndex:
+                        case ItemTagLocal.StringMinimum:
+                        case ItemTagLocal.StringMaximum:
+                            dlg = new NumberInputForm(0x00000000, 0xFFFFFFFF) { Text = EnumHelper.GetEnumDescription(tagLocal) };
+                            return true;
 
-                    case ItemTagLocal.Delimiter:
-                        dlg = new DelimeterForm() { Text = ShortItem.GetEnumDescription(tagLocal) };
-                        return true;
-                }
+                        case ItemTagLocal.Delimiter:
+                            dlg = new DelimeterForm() { Text = EnumHelper.GetEnumDescription(tagLocal) };
+                            return true;
+                    }
+                    break;
             }
 
             return false;
         }
 
-        private int GetBaseIndex()
-        {
-            return ListItems.SelectedItems.Count > 0
-                  ? ListItems.SelectedItems.Cast<ListViewItem>().Max(i => i.Index)
-                  : ReportItems.Count;
-        }
-
-        private object GetCurrentCollection()
-        {
-            var index = ListItems.SelectedItems.Count > 0
-             ? ListItems.SelectedItems.Cast<ListViewItem>().Max(i => i.Index)
-             : ListItems.Items.Count;
-
-            foreach (var item in ReportItems.Reverse<ShortItem>().Skip(ReportItems.Count - index))
-            {
-                if (item.Type == ItemType.Main && item.Tag is ItemTagMain main && main == ItemTagMain.Collection)
-                {
-                    return (CollectionType)item.Value;
-                }
-            }
-
-            return null;
-        }
-
         private void UpdateListView()
         {
-            ListItems.Items.Clear();
-            ListItems.Items.AddRange(ReportItems
-                .Select((i, index) => new ListViewItem(new string[]
+            // Сохраняем выделенные элементы
+            var selected = ListReportItems.SelectedItems
+                .Cast<ListViewItem>()
+                .Select(lvi => lvi.Tag as HIDReportItem)
+                .ToArray();
+
+            // Обновляем
+            ListReportItems.Items.Clear();
+            ListReportItems.Items.AddRange(ReportItems
+                .Select(item => new ListViewItem(new ListViewSubItem[]
                 {
-                    ShortItem.GetDisplayText(ReportItems, index),// GetBaseIndex()),
-                    i.BytesString,
+                    new ListViewSubItem(null, item.ToString(ReportItems)),
+                    new ListViewSubItem(null, item.BytesString) { ForeColor = NumberColor },
+                    new ListViewSubItem(null, !string.IsNullOrWhiteSpace(item.Comment)
+                        ? $"; {item.Comment}"
+                        : string.Empty) { ForeColor = CommentColor },
                 }, -1)
-                { Tag = i })
+                { Tag = item, UseItemStyleForSubItems = false })
                 .ToArray());
 
+            // Востанавливаем выделенные элементы
+            selected
+                .ToList()
+                .ForEach(item =>
+                {
+                    var lvi = ListReportItems.Items
+                    .Cast<ListViewItem>()
+                    .Where(lvi => lvi.Tag as HIDReportItem == item)
+                    .SingleOrDefault();
+
+                    if (lvi != null && ListReportItems.Items.Contains(lvi))
+                    {
+                        lvi.Selected = true;
+                        lvi.Focused = true;
+                    }
+                });
+
+            // Обновляем состояние кнопок
             EnableUpdate();
         }
 
         private void EnableUpdate()
         {
-            var isSelMoreOne = ListItems.SelectedItems.Count > 0;
-            var isHasMoreOne = ListItems.Items.Count > 0;
+            var isSelMoreOne = ListReportItems.SelectedItems.Count > 0;
+            var isHasMoreOne = ListReportItems.Items.Count > 0;
             // File
             SmFileSave.Enabled = isHasMoreOne && IsModified;
             SmFileSaveAs.Enabled = isHasMoreOne;
             SmFileExport.Enabled = isHasMoreOne;
             // Edit
+            SmEditComment.Enabled = isSelMoreOne;
             SmEditCut.Enabled = isSelMoreOne;
             SmEditCopy.Enabled = isSelMoreOne;
             SmEditPaste.Enabled = true; // TODO имеется вырезанные/скопированные элементы
@@ -336,8 +340,8 @@ namespace HID_Report_Descriptor_Editor.Forms
             SmViewStatusBar.Checked = isHasMoreOne;
             SmViewReportScheme.Checked = false; // TODO доделать структуру репорта
 
-            StatusBarElementCount.Text = $"Элементов: {ReportItems.Count}";
-            StatusBarByteCount.Text = $"{ReportItems.Sum(i => i.GetBytes().Length)} байт";
+            StatusBarElementCount.Text = $"Count: {ReportItems.Count}";
+            StatusBarByteCount.Text = $"{ReportItems.Sum(item => item.GetBytes().Length)} bytes";
         }
 
         private void OpenUrl(string url)
@@ -350,23 +354,56 @@ namespace HID_Report_Descriptor_Editor.Forms
 
         #region Events
 
-        private void ListItems_DoubleClick(object sender, EventArgs e)
+        private void ListReportItems_DoubleClick(object sender, EventArgs e)
         {
-            if (sender is ListView listView && listView.SelectedItems.Count == 1)
+            if (ListReportItems.SelectedItems.Count == 1)
             {
-                if (listView.SelectedItems[0].Tag is ShortItem item)
+                var tag = ListReportItems.SelectedItems[0].Tag;
+                if (tag is ShortItem shortItem)
                 {
-                    if (DoDialog(item, out IDialogValue dlg) && dlg != null)
+                    if (ShowEditDialog(shortItem))
                     {
-                        dlg.Value = (int)item.Value;
-                        if (dlg.ShowDialog() == DialogResult.OK)
-                        {
-                            item.Value = (int)dlg.Value;
-                            IsModified = true;
-                            UpdateListView();
-                        }
+                        IsModified = true;
+                        UpdateListView();
                     }
                 }
+                else if (tag is LongItem longItem)
+                {
+                    var dlg = new HexEditorForm()
+                    {
+                        Value = longItem.Value
+                    };
+
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        longItem.Value = dlg.Value;
+
+                        IsModified = true;
+                    }
+
+                    UpdateListView();
+                }
+                else
+                    throw new NotSupportedException();
+            }
+        }
+
+        private void ListPaletteItems_DoubleClick(object sender, EventArgs e)
+        {
+            if (ListPaletteItems.SelectedItems.Count == 1)
+            {
+                if (ListPaletteItems.SelectedItems[0].Tag is HIDReportHeader reportHeader)
+                {
+                    var newReportItem = new ShortItem() { Header = reportHeader };
+                    if (ShowEditDialog(newReportItem))
+                    {
+                        IsModified = true;
+                        ReportItems.Add(newReportItem);
+                        UpdateListView();
+                    }
+                }
+                else
+                    throw new NotSupportedException();
             }
         }
 
@@ -379,24 +416,13 @@ namespace HID_Report_Descriptor_Editor.Forms
                 switch (ret)
                 {
                     case DialogResult.Yes:
-                        Command_FileSave(null, EventArgs.Empty);
+                        SmFileSave_Click(null, EventArgs.Empty);
                         break;
                     case DialogResult.No:
                         break;
                     case DialogResult.Cancel:
                         e.Cancel = true;
                         break;
-                }
-            }
-        }
-
-        private void ListItemPalet_DoubleClick(object sender, EventArgs e)
-        {
-            if (sender is ListView listView && listView.SelectedItems.Count == 1)
-            {
-                if (listView.SelectedItems[0].Tag is ShortItem item)
-                {
-                    AddReportItem(new ShortItem(item));
                 }
             }
         }
@@ -410,7 +436,7 @@ namespace HID_Report_Descriptor_Editor.Forms
 
         #region Commands
 
-        private void Command_FileSaveAs(object sender, EventArgs e)
+        private void SmFileSaveAs_Click(object sender, EventArgs e)
         {
             var dlg = new SaveFileDialog()
             {
@@ -422,13 +448,13 @@ namespace HID_Report_Descriptor_Editor.Forms
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                Save(dlg.FileName);
+                Save(dlg.FileName, ReportItems);
                 Filename = dlg.FileName;
                 IsModified = false;
             }
         }
 
-        private void Command_FileOpen(object sender, EventArgs e)
+        private void SmFileOpen_Click(object sender, EventArgs e)
         {
             var args = new FormClosingEventArgs(CloseReason.UserClosing, false);
             MainForm_FormClosing(null, args);
@@ -448,8 +474,10 @@ namespace HID_Report_Descriptor_Editor.Forms
             }
         }
 
-        private void Command_FileExport(object sender, EventArgs e)
+        private void SmFileExport_Click(object sender, EventArgs e)
         {
+            throw new NotImplementedException();
+            /*
             var dlg = new SaveFileDialog()
             {
                 Title = "Export to C Header file",
@@ -462,79 +490,115 @@ namespace HID_Report_Descriptor_Editor.Forms
             {
                 Program.Export(ReportItems, dlg.FileName);
             }
+            */
         }
 
-        private void Command_FileSave(object sender, EventArgs e)
+        private void SmFileSave_Click(object sender, EventArgs e)
         {
             if (IsNewFile)
             {
-                Command_FileSaveAs(null, EventArgs.Empty);
+                SmFileSaveAs_Click(null, EventArgs.Empty);
                 IsNewFile = false;
             }
             else
             {
-                Save(Filename);
+                Save(Filename, ReportItems);
                 IsModified = false;
             }
         }
 
-        private void Command_EditDelete(object sender, EventArgs e)
+        private void SmEditDelete_Click(object sender, EventArgs e)
         {
-            if (ListItems.SelectedItems.Count > 0)
-            {
-                ListItems.SelectedItems
-                    .Cast<ListViewItem>()
-                    .ToList()
-                    .ForEach(f => ReportItems.Remove(f.Tag as ShortItem));
+            UpdateListView();
 
+            if (ListReportItems.SelectedItems.Count > 0)
+            {
+                foreach (ListViewItem lvi in ListReportItems.SelectedItems)
+                {
+                    var reportItems = lvi.Tag as ShortItem;
+                    ReportItems.Remove(reportItems);
+                }
                 IsModified = true;
                 UpdateListView();
             }
         }
 
-        private void Command_EditDeleteAll(object sender, EventArgs e)
+        private void SmEditDeleteAll_Click(object sender, EventArgs e)
         {
             ReportItems.Clear();
             IsModified = true;
             UpdateListView();
         }
 
-        private void Command_EditSelectAll(object sender, EventArgs e)
+        private void SmEditSelectAll_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem item in ListItems.Items)
+            foreach (ListViewItem item in ListReportItems.Items)
             {
                 item.Selected = true;
                 item.Focused = true;
             }
         }
 
-        private void Command_HelpAbout(object sender, EventArgs e)
+        private void SmEditComment_Click(object sender, EventArgs e)
+        {
+            if (ListReportItems.SelectedItems.Count == 1)
+            {
+                if (ListReportItems.SelectedItems[0].Tag is ShortItem reportItem)
+                {
+                    var dlg = new CommentForm() { Comment = reportItem.Comment };
+
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        reportItem.Comment = string.IsNullOrWhiteSpace(dlg.Comment) ? null : dlg.Comment;
+                        IsModified = true;
+                        UpdateListView();
+                    }
+                }
+            }
+        }
+
+        private void SmHelpAbout_Click(object sender, EventArgs e)
         {
             new AboutForm().ShowDialog();
         }
 
-        private void Command_HelpHIDSpec(object sender, EventArgs e)
+        private void SmHelpHIDSpec_Click(object sender, EventArgs e)
         {
             const string url = "https://www.usb.org/sites/default/files/hid1_11.pdf";
             OpenUrl(url);
         }
 
-        private void Command_HelpHIDUsages(object sender, EventArgs e)
+        private void SmHelpHIDUsages_Click(object sender, EventArgs e)
         {
             const string url = "https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf";
             OpenUrl(url);
         }
 
-        private void Command_ToolsRegisterFileExt(object sender, EventArgs e)
+        private void SmToolsRegisterFileExt_Click(object sender, EventArgs e)
         {
             FileExtensionApplication.Register();
         }
 
-        private void Command_ToolsUnregisterFileExt(object sender, EventArgs e)
+        private void SmToolsUnregisterFileExt_Click(object sender, EventArgs e)
         {
             FileExtensionApplication.Unregister();
         }
 
         #endregion
+
+        private void BtnAddLongItem_Click(object sender, EventArgs e)
+        {
+            var longItem = new LongItem();
+            var dlg = new HexEditorForm();
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                longItem.Value = dlg.Value;
+                ReportItems.Add(longItem);
+                IsModified = true;
+            }
+
+            UpdateListView();
+        }
     }
 }

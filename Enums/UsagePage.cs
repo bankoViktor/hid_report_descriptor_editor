@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace HID_Report_Descriptor_Editor.Enums
 {
-    public enum UsagePage
+    public enum UsagePage : ushort
     {
         // ширина 2 байта
         [Description("Undefined")]

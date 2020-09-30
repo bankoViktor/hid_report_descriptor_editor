@@ -26,7 +26,6 @@ namespace HID_Report_Descriptor_Editor.Forms
                 }
             }
         }
-        public string Caption { get; set; }
 
         public DelimeterForm()
         {

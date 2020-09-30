@@ -19,6 +19,7 @@ bankviktor14@gmail.com</Description>
     <ApplicationIcon></ApplicationIcon>
     <Company>Banko Viktor S</Company>
     <Win32Resource>D:\source\repos\hid_report_descriptor_editor\Resources\win32_resource.res</Win32Resource>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,6 +41,12 @@ bankviktor14@gmail.com</Description>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="examples\mouse.hid">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

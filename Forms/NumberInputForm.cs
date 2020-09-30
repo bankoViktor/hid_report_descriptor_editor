@@ -1,49 +1,52 @@
 ﻿using HID_Report_Descriptor_Editor.Utils;
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace HID_Report_Descriptor_Editor.Forms
 {
     public partial class NumberInputForm : Form, IDialogValue
     {
-        private uint MinValue { get; }
-        private uint MaxValue { get; }
+        //private uint MinValue { get; }
+        //private uint MaxValue { get; }
+
         public object Value
         {
-            get
-            {
-                throw new NotImplementedException();
-                //var converter = new Int64Converter();
-                //if (converter.CanConvertFrom(typeof(string)))
-                //{
-
-                //}
-                //else
-                //    return null; Int64Converter.Parse(TbValue.Text);
-            }
-            set => TbValue.Text = value != null ? value.ToString() : "0"; 
+            get => GetValue();
+            set => TbValue.Text = value == null ? "0" : value.ToString();
         }
-        public string Caption { get; set; }
 
         public NumberInputForm(uint min, uint max)
         {
             InitializeComponent();
-            MinValue = min;
-            MaxValue = max;
-
             TbValue.Text = "0";
             TbValue.Select();
         }
 
-        private void CheckedChanged(object sender, System.EventArgs e)
+        private int? GetValue()
         {
+            if (RbDEC.Checked)
+            {
+                return int.Parse(TbValue.Text);
+            }
+            else if (RbHEX.Checked)
+            {
+                return int.Parse(TbValue.Text, System.Globalization.NumberStyles.HexNumber);
+            }
 
+            return null;
         }
 
-        private void TbValue_TextChanged(object sender, System.EventArgs e)
+
+        private void RbDEC_CheckedChanged_1(object sender, EventArgs e)
         {
-            //BtnOK.Enabled = !string.IsNullOrWhiteSpace(textBox1.Text) && int.TryParse(textBox1.Text, out int result);
+            if (RbDEC.Checked)
+                TbValue.Text = int.Parse(TbValue.Text, System.Globalization.NumberStyles.HexNumber).ToString("D");
+        }
+
+        private void RbHEX_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RbHEX.Checked)
+                TbValue.Text = int.Parse(TbValue.Text).ToString("X");
         }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace HID_Report_Descriptor_Editor.Enums.UsagePages
 {
-    public enum UsageButtons
+    public enum UsageButtons : ushort
     {
         [Description("No Button Pressed")]
         NoButtonPressed = 0x0000,

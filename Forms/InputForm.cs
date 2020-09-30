@@ -26,7 +26,7 @@ namespace HID_Report_Descriptor_Editor.Forms
             }
             set
             {
-                if (value != null && value is int val)
+                if (value != null && value is uint val)
                 {
                     var b0 = val & (1 << 0);
                     rb0_Data.Checked = !(b0 > 0);
@@ -66,7 +66,6 @@ namespace HID_Report_Descriptor_Editor.Forms
                 }
             }
         }
-        public string Caption { get; set; }
 
         public InputForm(ItemTagMain itemTagMain)
         {

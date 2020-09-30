@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<ArrayOfHIDReportItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <HIDReportItem xsi:type="ShortItem" Bytes="05 01" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="09 02" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="A1 01" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="09 01" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="A1 00" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="95 03" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="75 01" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="05 09" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="19 01" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="29 03" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="15 00" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="25 01" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="81 02" Comment="1 bit x 3 - LBM, MBM and RBM" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="95 01" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="75 05" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="81 01" Comment="5 bit x 1 - const" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="95 02" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="75 08" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="05 01" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="09 30" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="09 31" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="15 81" Comment="-127" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="25 7F" Comment="+127" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="81 06" Comment="8 bit x 2 - Axis X and Y" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="C0" />
+  <HIDReportItem xsi:type="ShortItem" Bytes="C0" />
+</ArrayOfHIDReportItem>

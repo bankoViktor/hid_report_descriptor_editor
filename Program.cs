@@ -20,7 +20,7 @@ namespace HID_Report_Descriptor_Editor
         static void Main(string[] args)
         {
             // TODO локализация
-            var culture = System.Globalization.CultureInfo.GetCultureInfo("ru-RU"); ;
+            var culture = System.Globalization.CultureInfo.GetCultureInfo("en-US"); ;
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
 
@@ -69,7 +69,7 @@ namespace HID_Report_Descriptor_Editor
                                 var ext = Path.GetExtension(hdrFile);
                                 if (ext == ".h" || ext == ".hpp")
                                 {
-                                    var reportItems = MainForm.LoadFile(hidFile);
+                                    var reportItems = MainForm.Open(hidFile);
                                     Export(reportItems, hdrFile);
                                 }
                                 else
@@ -139,8 +139,10 @@ namespace HID_Report_Descriptor_Editor
             return false;
         }
 
-        public static void Export(IEnumerable<ShortItem> reportItems, string filename)
+        public static void Export(HIDReportItemCollection reportItems, string filename)
         {
+            throw new NotImplementedException();
+            /*
             int size = reportItems.Sum(i => i.GetBytes().Length);
             var def = Path.GetFileName(filename).ToUpper().Replace(' ', '_').Replace('.', '_');
 
@@ -166,18 +168,20 @@ namespace HID_Report_Descriptor_Editor
                     line += $"0x{b,2:X2}, ";
                 }
                 line = line.PadRight(40, ' ');
-                line += "// " + ShortItem.GetDisplayText((IList<ShortItem>)reportItems, index);
+                line += "// " + ShortItem.1GetDisplayText((IList<ShortItem>)reportItems, index);
                 content += line;
             }
 
             content += $"\n";
             content += $"}};\n";
             content += $"\n";
-            content += $"#endif /* {def} */\n";
+            //content += $"#endif // {def} \n";
 
             var writer = new StreamWriter(File.Open(filename, FileMode.Create));
             writer.Write(content);
             writer.Close();
+            */
         }
+       
     }
 }

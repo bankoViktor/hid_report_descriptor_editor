@@ -11,7 +11,7 @@ namespace HID_Report_Descriptor_Editor.Forms
         {
             get
             {
-                return groupBox1.Controls
+                return (CollectionType)groupBox1.Controls
                     .OfType<RadioButton>()
                     .First(rb => rb.Checked).Tag;
             }
@@ -26,7 +26,6 @@ namespace HID_Report_Descriptor_Editor.Forms
                 }
             }
         }
-        public string Caption { get; set; }
 
         public CollectionForm()
         {

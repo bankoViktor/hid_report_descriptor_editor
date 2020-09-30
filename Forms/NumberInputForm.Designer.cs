@@ -69,7 +69,7 @@
             this.RbDEC.TabStop = true;
             this.RbDEC.Text = "DEC";
             this.RbDEC.UseVisualStyleBackColor = true;
-            this.RbDEC.CheckedChanged += new System.EventHandler(this.CheckedChanged);
+            this.RbDEC.CheckedChanged += new System.EventHandler(this.RbDEC_CheckedChanged_1);
             // 
             // RbHEX
             // 
@@ -81,15 +81,14 @@
             this.RbHEX.TabIndex = 1;
             this.RbHEX.Text = "HEX";
             this.RbHEX.UseVisualStyleBackColor = true;
-            this.RbHEX.CheckedChanged += new System.EventHandler(this.CheckedChanged);
+            this.RbHEX.CheckedChanged += new System.EventHandler(this.RbHEX_CheckedChanged);
             // 
-            // textBox1
+            // TbValue
             // 
             this.TbValue.Location = new System.Drawing.Point(12, 23);
-            this.TbValue.Name = "textBox1";
+            this.TbValue.Name = "TbValue";
             this.TbValue.Size = new System.Drawing.Size(233, 23);
             this.TbValue.TabIndex = 2;
-            this.TbValue.TextChanged += new System.EventHandler(this.TbValue_TextChanged);
             // 
             // NumberInputForm
             // 

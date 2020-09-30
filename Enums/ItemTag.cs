@@ -2,7 +2,7 @@
 
 namespace HID_Report_Descriptor_Editor.Enums
 {
-    public enum ItemTagMain
+    public enum ItemTagMain : byte
     {
         // ширина 4 бита
         // reserved 0b0000 - 0b0111
@@ -19,7 +19,7 @@ namespace HID_Report_Descriptor_Editor.Enums
         // reserved 0b1101 - 0b1111
     }
 
-    public enum ItemTagGlobal
+    public enum ItemTagGlobal : byte
     {
         // ширина 4 бита
         [Description("USAGE PAGE")]
@@ -49,7 +49,7 @@ namespace HID_Report_Descriptor_Editor.Enums
         // reserved 0b1100 - 0b1111
     }
 
-    public enum ItemTagLocal
+    public enum ItemTagLocal : byte
     {
         // ширина 4 бита
         [Description("USAGE")]

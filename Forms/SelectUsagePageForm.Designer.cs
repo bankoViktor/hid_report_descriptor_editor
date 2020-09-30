@@ -30,7 +30,7 @@
         {
             this.BtnOK = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.ListUsagePages = new System.Windows.Forms.ListView();
             this.ColumnName = new System.Windows.Forms.ColumnHeader();
             this.ColumnHEX = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
@@ -58,35 +58,35 @@
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // ListUsagePages
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ListUsagePages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ListUsagePages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnName,
             this.ColumnHEX});
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(12, 12);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(348, 270);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.DoubleClick += new System.EventHandler(this.ListView1_DoubleClick);
+            this.ListUsagePages.FullRowSelect = true;
+            this.ListUsagePages.HideSelection = false;
+            this.ListUsagePages.Location = new System.Drawing.Point(12, 12);
+            this.ListUsagePages.MultiSelect = false;
+            this.ListUsagePages.Name = "ListUsagePages";
+            this.ListUsagePages.Size = new System.Drawing.Size(348, 270);
+            this.ListUsagePages.TabIndex = 1;
+            this.ListUsagePages.UseCompatibleStateImageBehavior = false;
+            this.ListUsagePages.View = System.Windows.Forms.View.Details;
+            this.ListUsagePages.DoubleClick += new System.EventHandler(this.ListView1_DoubleClick);
             // 
             // ColumnName
             // 
+            this.ColumnName.DisplayIndex = 1;
             this.ColumnName.Text = "Название";
             this.ColumnName.Width = 220;
-            this.ColumnName.DisplayIndex = 1;
             // 
             // ColumnHEX
             // 
-            this.ColumnHEX.Text = "HEX";
             this.ColumnHEX.DisplayIndex = 0;
+            this.ColumnHEX.Text = "HEX";
             // 
             // SelectUsagePageForm
             // 
@@ -95,7 +95,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(372, 322);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.ListUsagePages);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnOK);
             this.MaximizeBox = false;
@@ -114,7 +114,7 @@
 
         private System.Windows.Forms.Button BtnOK;
         private System.Windows.Forms.Button BtnCancel;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView ListUsagePages;
         private System.Windows.Forms.ColumnHeader ColumnHEX;
         private System.Windows.Forms.ColumnHeader ColumnName;
     }

@@ -1,5 +1,4 @@
 ﻿using HID_Report_Descriptor_Editor.Attributes;
-using HID_Report_Descriptor_Editor.Items;
 using HID_Report_Descriptor_Editor.Utils;
 using System;
 using System.Data;
@@ -14,34 +13,14 @@ namespace HID_Report_Descriptor_Editor.Forms
     {
         public object Value
         {
-            get
-            {
-                if (listView1.SelectedItems.Count > 0)
-                {
-                    return (int)listView1.SelectedItems[0].Tag;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            get => ListUsages.SelectedItems.Count > 0
+                ? ListUsages.SelectedItems[0].Tag : null;
             set
             {
                 if (value != null)
                 {
-                    var item = listView1.Items
-                        .Cast<ListViewItem>()
-                        .Where(lvi => (int)lvi.Tag == (int)value)
-                        .SingleOrDefault();
-
-                    if (item != null)
-                    {
-                        item.Selected = true;
-                        item.Focused = true;
-                    }
+                    SeletItem(value);
                 }
-
-                listView1.Select();
             }
         }
 
@@ -49,48 +28,50 @@ namespace HID_Report_Descriptor_Editor.Forms
         {
             InitializeComponent();
 
-            listView1.DoubleBuffering(true);
-            listView1.Items.Clear();
-            listView1.Items.AddRange(type.GetFields()
+            ListUsages.DoubleBuffering(true);
+            ListUsages.Items.Clear();
+            ListUsages.Items.AddRange(type.GetFields()
                 .Where(f => f.FieldType == type)
-                .OrderBy(f => (int)Enum.Parse(type, f.Name))
+                .OrderBy(f => Enum.Parse(type, f.Name))
                 .Select(f =>
                 {
-                    var value = Enum.Parse(type, f.Name);
-                    var name = ShortItem.GetEnumDescription(value);
+                    var _enum_ = Enum.Parse(type, f.Name);
+                    var name = EnumHelper.GetEnumDescription(_enum_);
+                    var enum_numb = Convert.ChangeType(_enum_, typeof(int));
                     return new ListViewItem(new ListViewItem.ListViewSubItem[]
                     {
                         new ListViewItem.ListViewSubItem(null, name),
-                        new ListViewItem.ListViewSubItem(null, string.Format("{0:X4}", (int)value) ) { ForeColor = Color.Gray },
+                        new ListViewItem.ListViewSubItem(null, $"{enum_numb:X4}") { ForeColor = Color.Gray },
                         new ListViewItem.ListViewSubItem(null, f.GetCustomAttribute<UsageTypeAttribute>()?.UsageValueType ) { ForeColor = Color.Gray },
                     }, -1)
-                    { Tag = value, UseItemStyleForSubItems = false };
+                    { Tag = _enum_, UseItemStyleForSubItems = false };
                 })
                 .ToArray());
 
             SelectUsageForm_Resize(null, EventArgs.Empty);
 
-            if (listView1.Items.Count > 0)
-            {
-                listView1.Items[0].Selected = true;
-                listView1.Items[0].Focused = true;
-            }
-            listView1.Select();
+            ListUsages.Select();
         }
 
-        private void BtnOK_Click(object sender, EventArgs e)
+        private void SeletItem(object value)
         {
-            if (listView1.SelectedItems.Count == 1)
+            var item = ListUsages.Items
+                        .Cast<ListViewItem>()
+                        .Where(lvi => lvi.Tag.Equals(value))
+                        .SingleOrDefault();
+
+            if (item != null)
             {
-                Value = listView1.SelectedItems[0].Tag;
-                DialogResult = DialogResult.OK;
-                Close();
+                item.Selected = true;
+                item.Focused = true;
+                ListUsages.TopItem = item;
             }
         }
 
         private void ListView1_DoubleClick(object sender, EventArgs e)
         {
-            BtnOK_Click(null, EventArgs.Empty);
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void SelectUsageForm_Resize(object sender, EventArgs e)
@@ -102,10 +83,10 @@ namespace HID_Report_Descriptor_Editor.Forms
                 0.30f,
             };
 
-            for (int i = 0; i < listView1.Columns.Count; i++)
+            for (int i = 0; i < ListUsages.Columns.Count; i++)
             {
-                var column = listView1.Columns[i];
-                var width = listView1.Width - SystemInformation.VerticalScrollBarWidth - 5;
+                var column = ListUsages.Columns[i];
+                var width = ListUsages.Width - SystemInformation.VerticalScrollBarWidth - 5;
                 column.Width = (int)(widths[i] * width);
             }
         }
@@ -113,7 +94,6 @@ namespace HID_Report_Descriptor_Editor.Forms
         private void BtnHelp_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Help");
-            // TODO подсказка Usage-типы
         }
     }
 }

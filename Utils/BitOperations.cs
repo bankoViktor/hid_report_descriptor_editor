@@ -7,5 +7,10 @@ namespace HID_Report_Descriptor_Editor.Utils
         {
             return (value & (1 << bit)) > 0;
         }
+
+        public static bool IsSetBit(uint value, int bit)
+        {
+            return (value & (1 << bit)) > 0;
+        }
     }
 }
