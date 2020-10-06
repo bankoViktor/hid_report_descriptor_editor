@@ -1,6 +1,7 @@
 ﻿using HID_Report_Descriptor_Editor.Attributes;
 using HID_Report_Descriptor_Editor.Enums;
 using HID_Report_Descriptor_Editor.Items;
+using HID_Report_Descriptor_Editor.Properties;
 using HID_Report_Descriptor_Editor.Utils;
 using System;
 using System.Data;
@@ -52,7 +53,7 @@ namespace HID_Report_Descriptor_Editor.Forms
         {
             Initialize();
             IsNewFile = true;
-            CreateFile($"unnamed{Program.FileExtension}");
+            CreateFile(Resources.MainForm_UnnamedFile + Program.FileExtension);
             EnableUpdate();
         }
 
@@ -65,6 +66,35 @@ namespace HID_Report_Descriptor_Editor.Forms
             ListPaletteItems.Items.AddRange(HIDReportHeader.ShortItemHeaders
                 .Select(item => new ListViewItem(item.ToString(), GetLVGroup(item.Type)) { Tag = item })
                 .ToArray());
+
+            // Localize
+            ColumnItem.Text = Resources.MainForm_ColumnItem;
+            ColumnHex.Text = Resources.MainForm_ColumnHex;
+            СolumnComment.Text = Resources.MainForm_ColumnComment;
+            BtnAddLongItem.Text = Resources.MainForm_AddLongItem;
+            SmFile.Text = Resources.MainForm_MiFile;
+            SmFileOpen.Text = Resources.MainForm_MiFileOpen;
+            SmFileSave.Text = Resources.MainForm_MiFileSave;
+            SmFileSaveAs.Text = Resources.MainForm_MiFileSaveAs;
+            SmFileExport.Text = Resources.MainForm_MiFileExport;
+            SmEdit.Text = Resources.MainForm_MiEdit;
+            SmEditComment.Text = Resources.MainForm_MiEditComment;
+            SmEditCopy.Text = Resources.MainForm_MiEditCopy;
+            SmEditCut.Text = Resources.MainForm_MiEditCut;
+            SmEditPaste.Text = Resources.MainForm_MiEditPaste;
+            SmEditDelete.Text = Resources.MainForm_MiEditDelete;
+            SmEditDeleteAll.Text = Resources.MainForm_MiEditDeleteAll;
+            SmEditMoveUp.Text = Resources.MainForm_MiEditMoveUp;
+            SmEditMoveDown.Text = Resources.MainForm_MiEditMoveDown;
+            SmView.Text = Resources.MainForm_MiView;
+            SmViewStatusBar.Text = Resources.MainForm_MiViewStatusBar;
+            SmViewReportScheme.Text = Resources.MainForm_MiViewReportScheme;
+            SmTools.Text = Resources.MainForm_MiTools;
+            SmToolsRegisterFileExt.Text = Resources.MainForm_MiToolsRegisterFileExt;
+            SmToolsUnregisterFileExt.Text = Resources.MainForm_MiToolsUnregisterFileExt;
+            SmHelp.Text = Resources.MainForm_MiHelp;
+            SmHelpHIDSpec.Text = Resources.MainForm_MiHelpHIDSpec;
+            SmHelpHIDUsages.Text = Resources.MainForm_MiHelpHIDUsages;
         }
 
         #endregion
@@ -73,9 +103,9 @@ namespace HID_Report_Descriptor_Editor.Forms
 
         private static readonly ListViewGroup[] GroupCollection =
         {
-            new ListViewGroup("Main"),
-            new ListViewGroup("Global"),
-            new ListViewGroup("Local"),
+            new ListViewGroup(Resources.MainForm_GroupMain),
+            new ListViewGroup(Resources.MainForm_GroupGlobal),
+            new ListViewGroup(Resources.MainForm_GroupLocal),
         };
 
         private ListViewGroup GetLVGroup(ItemType type)
@@ -126,7 +156,8 @@ namespace HID_Report_Descriptor_Editor.Forms
             }
             catch (Exception)
             {
-                MessageBox.Show("This file format is not supported.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format(Resources.FileTypeNotSupported, filename), 
+                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -188,7 +219,7 @@ namespace HID_Report_Descriptor_Editor.Forms
                             var originItem = ListReportItems.Items.Count;
                             if (ReportItems.GetOpenCollectionCount(originItem) == 0)
                             {
-                                MessageBox.Show("Not matching Collection statrt.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                MessageBox.Show(Resources.NotCollectionStart, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return false;
                             }
                             return true;
@@ -200,13 +231,16 @@ namespace HID_Report_Descriptor_Editor.Forms
                     switch (tagGlobal)
                     {
                         case ItemTagGlobal.UsagePage:
-                            dlg = new SelectUsagePageForm() { Text = EnumHelper.GetEnumDescription(tagGlobal) };
+                            dlg = new UsagePageForm() { Text = EnumHelper.GetEnumDescription(tagGlobal) };
                             return true;
 
                         case ItemTagGlobal.LogicalMinimum:
                         case ItemTagGlobal.LogicalMaximum:
                         case ItemTagGlobal.PhysicalMinimum:
                         case ItemTagGlobal.PhysicalMaximum:
+                            dlg = new NumberInputForm(-0x80000000, 0x7FFFFFFF) { Text = EnumHelper.GetEnumDescription(tagGlobal) };
+                            return true;
+
                         case ItemTagGlobal.ReportSize:
                         case ItemTagGlobal.ReportCount:
                             dlg = new NumberInputForm(0x00000000, 0xFFFFFFFF) { Text = EnumHelper.GetEnumDescription(tagGlobal) };
@@ -214,10 +248,10 @@ namespace HID_Report_Descriptor_Editor.Forms
 
                         case ItemTagGlobal.UnitExponent:
                         case ItemTagGlobal.Unit:
-                            MessageBox.Show("Not Implemented.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Resources.NotImplemented, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return false;
 
-                        case ItemTagGlobal.ReportID: // 1 byte
+                        case ItemTagGlobal.ReportID: 
                             dlg = new NumberInputForm(0x00, 0xFF) { Text = EnumHelper.GetEnumDescription(tagGlobal) };
                             return true;
 
@@ -244,18 +278,23 @@ namespace HID_Report_Descriptor_Editor.Forms
                                 if (upType != null)
                                 {
                                     var usagePageName = EnumHelper.GetEnumDescription(topUsagePage);
-                                    dlg = new SelectUsageForm(upType)
+                                    dlg = new UsageForm(upType)
                                     {
-                                        Text = string.Format("{0} from {1} (0x{2:X4})",
+                                        Text = string.Format(Resources.UsageForm_SelectedUsagePage,
                                             EnumHelper.GetEnumDescription(tagLocal), usagePageName, (int)topUsagePage),
                                     };
                                     return true;
                                 }
                                 else
-                                    MessageBox.Show($"A set Usages for Usage Page \"{EnumHelper.GetEnumDescription(topUsagePage.Value)}\" don't defined.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                {
+                                    MessageBox.Show(string.Format(Resources.MainForm_SetUsagesNotDefined, EnumHelper.GetEnumDescription(topUsagePage.Value)),
+                                        Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                             else
-                                MessageBox.Show("You must define a Usage Page before selecting a Usage.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            {
+                                MessageBox.Show(Resources.MainForm_MustDefinedUsagePage, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                             return false;
 
                         case ItemTagLocal.DesignatorIndex:
@@ -339,9 +378,9 @@ namespace HID_Report_Descriptor_Editor.Forms
             // View
             SmViewStatusBar.Checked = isHasMoreOne;
             SmViewReportScheme.Checked = false; // TODO доделать структуру репорта
-
-            StatusBarElementCount.Text = $"Count: {ReportItems.Count}";
-            StatusBarByteCount.Text = $"{ReportItems.Sum(item => item.GetBytes().Length)} bytes";
+            // Status Bar
+            StatusBarElementCount.Text = string.Format(Resources.MainForm_CountItem, ReportItems.Count);
+            StatusBarByteCount.Text = string.Format(Resources.MainForm_CountBytes, ReportItems.Sum(item => item.GetBytes().Length));
         }
 
         private void OpenUrl(string url)
@@ -369,23 +408,33 @@ namespace HID_Report_Descriptor_Editor.Forms
                 }
                 else if (tag is LongItem longItem)
                 {
-                    var dlg = new HexEditorForm()
+                    if (LongDialog(longItem))
                     {
-                        Value = longItem.Value
-                    };
-
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                    {
-                        longItem.Value = dlg.Value;
-
-                        IsModified = true;
+                        UpdateListView();
                     }
-
-                    UpdateListView();
                 }
                 else
                     throw new NotSupportedException();
             }
+        }
+
+        private bool LongDialog(LongItem longItem)
+        {
+            var dlg = new HexEditorForm()
+            {
+                LongTag = longItem.LongItemTag,
+                Value = longItem.Value
+            };
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                longItem.Value = dlg.Value;
+                longItem.LongItemTag = dlg.LongTag;
+                IsModified = true;
+                return true;
+            }
+
+            return false;
         }
 
         private void ListPaletteItems_DoubleClick(object sender, EventArgs e)
@@ -411,7 +460,7 @@ namespace HID_Report_Descriptor_Editor.Forms
         {
             if (IsModified)
             {
-                var ret = MessageBox.Show($"File has been modidied! Do you want to save it?", Application.ProductName,
+                var ret = MessageBox.Show(Resources.MainForm_SaveModidiedFile, Application.ProductName,
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 switch (ret)
                 {
@@ -432,6 +481,16 @@ namespace HID_Report_Descriptor_Editor.Forms
             EnableUpdate();
         }
 
+        private void BtnAddLongItem_Click(object sender, EventArgs e)
+        {
+            var longItem = new LongItem();
+            if (LongDialog(longItem))
+            {
+                ReportItems.Add(longItem);
+            }
+            UpdateListView();
+        }
+
         #endregion
 
         #region Commands
@@ -440,8 +499,8 @@ namespace HID_Report_Descriptor_Editor.Forms
         {
             var dlg = new SaveFileDialog()
             {
-                Title = "Save As ...",
-                Filter = $"{Program.FileExtensionCaption} (*{Program.FileExtension})|*{Program.FileExtension}",
+                Title = Resources.DialogSaveAs,
+                Filter = $"{Resources.FileExtensionCaption} (*{Program.FileExtension})|*{Program.FileExtension}",
                 InitialDirectory = Path.GetDirectoryName(Filename),
                 FileName = Path.GetFileName(Filename),
             };
@@ -462,8 +521,8 @@ namespace HID_Report_Descriptor_Editor.Forms
             {
                 var dlg = new OpenFileDialog()
                 {
-                    Title = "Open File",
-                    Filter = $"{Program.FileExtensionCaption} (*{Program.FileExtension})|*{Program.FileExtension}",
+                    Title = Resources.DialogOpenFile,
+                    Filter = $"{Resources.FileExtensionCaption} (*{Program.FileExtension})|*{Program.FileExtension}",
                 };
 
                 if (dlg.ShowDialog() == DialogResult.OK)
@@ -476,7 +535,7 @@ namespace HID_Report_Descriptor_Editor.Forms
 
         private void SmFileExport_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            MessageBox.Show(Resources.NotImplemented, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             /*
             var dlg = new SaveFileDialog()
             {
@@ -585,20 +644,5 @@ namespace HID_Report_Descriptor_Editor.Forms
         }
 
         #endregion
-
-        private void BtnAddLongItem_Click(object sender, EventArgs e)
-        {
-            var longItem = new LongItem();
-            var dlg = new HexEditorForm();
-
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                longItem.Value = dlg.Value;
-                ReportItems.Add(longItem);
-                IsModified = true;
-            }
-
-            UpdateListView();
-        }
     }
 }

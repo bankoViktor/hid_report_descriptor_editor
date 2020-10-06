@@ -1,36 +1,37 @@
-﻿using HID_Report_Descriptor_Editor.Attributes;
+﻿using HID_Report_Descriptor_Editor.Enums;
 using HID_Report_Descriptor_Editor.Utils;
 using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace HID_Report_Descriptor_Editor.Forms
 {
-    public partial class SelectUsageForm : Form, IDialogValue
+    public partial class UsagePageForm : Form, IDialogValue
     {
         public object Value
         {
-            get => ListUsages.SelectedItems.Count > 0
-                ? ListUsages.SelectedItems[0].Tag : null;
+            get => ListUsagePages.SelectedItems.Count == 1
+                ? ListUsagePages.SelectedItems[0].Tag : null;
             set
             {
                 if (value != null)
                 {
-                    SeletItem(value);
+                    SelectItem(value);
                 }
             }
         }
 
-        public SelectUsageForm(Type type)
+        public UsagePageForm()
         {
             InitializeComponent();
 
-            ListUsages.DoubleBuffering(true);
-            ListUsages.Items.Clear();
-            ListUsages.Items.AddRange(type.GetFields()
+            var type = typeof(UsagePage);
+
+            ListUsagePages.DoubleBuffering(true);
+            ListUsagePages.Items.Clear();
+            ListUsagePages.Items.AddRange(type.GetFields()
                 .Where(f => f.FieldType == type)
                 .OrderBy(f => Enum.Parse(type, f.Name))
                 .Select(f =>
@@ -42,20 +43,19 @@ namespace HID_Report_Descriptor_Editor.Forms
                     {
                         new ListViewItem.ListViewSubItem(null, name),
                         new ListViewItem.ListViewSubItem(null, $"{enum_numb:X4}") { ForeColor = Color.Gray },
-                        new ListViewItem.ListViewSubItem(null, f.GetCustomAttribute<UsageTypeAttribute>()?.UsageValueType ) { ForeColor = Color.Gray },
                     }, -1)
                     { Tag = _enum_, UseItemStyleForSubItems = false };
                 })
                 .ToArray());
 
-            SelectUsageForm_Resize(null, EventArgs.Empty);
+            SelectUsagePageForm_Resize(null, EventArgs.Empty);
 
-            ListUsages.Select();
+            ListUsagePages.Select();
         }
 
-        private void SeletItem(object value)
+        private void SelectItem(object value)
         {
-            var item = ListUsages.Items
+            var item = ListUsagePages.Items
                         .Cast<ListViewItem>()
                         .Where(lvi => lvi.Tag.Equals(value))
                         .SingleOrDefault();
@@ -64,36 +64,38 @@ namespace HID_Report_Descriptor_Editor.Forms
             {
                 item.Selected = true;
                 item.Focused = true;
-                ListUsages.TopItem = item;
+                ListUsagePages.TopItem = item;
+            }
+        }
+
+        private void BtnOK_Click(object sender, EventArgs e)
+        {
+            if (ListUsagePages.SelectedItems.Count == 1)
+            {
+                DialogResult = DialogResult.OK;
+                Close();
             }
         }
 
         private void ListView1_DoubleClick(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
-            Close();
+            BtnOK_Click(null, EventArgs.Empty);
         }
 
-        private void SelectUsageForm_Resize(object sender, EventArgs e)
+        private void SelectUsagePageForm_Resize(object sender, EventArgs e)
         {
             float[] widths =
             {
-                0.55f,
+                0.85f,
                 0.15f,
-                0.30f,
             };
 
-            for (int i = 0; i < ListUsages.Columns.Count; i++)
+            for (int i = 0; i < ListUsagePages.Columns.Count; i++)
             {
-                var column = ListUsages.Columns[i];
-                var width = ListUsages.Width - SystemInformation.VerticalScrollBarWidth - 5;
+                var column = ListUsagePages.Columns[i];
+                var width = ListUsagePages.Width - SystemInformation.VerticalScrollBarWidth - 8;
                 column.Width = (int)(widths[i] * width);
             }
-        }
-
-        private void BtnHelp_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Help");
         }
     }
 }

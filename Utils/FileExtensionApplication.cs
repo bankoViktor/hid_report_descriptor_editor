@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using HID_Report_Descriptor_Editor.Properties;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -451,18 +452,18 @@ namespace HID_Report_Descriptor_Editor.Utils
         {
             ProgID = GetProgID(),
             Extension = Program.FileExtension,
-            Description = Program.FileExtensionCaption,
+            Description = Resources.FileExtensionCaption,
             InfoTip = "prop:FileDescription;Company;FileVersion;Create;Size",
             DefaultIcon = $"{Process.GetCurrentProcess().MainModule.FileName},-{2}", // TODO иконка типа файла
             Verbs = new Verb[]
                 {
                     new Verb("open", $"{Process.GetCurrentProcess().MainModule.FileName} %1")
                     {
-                        Title = "Открыть",
+                        Title = Resources.ShellOpen,
                     },
                     new Verb("export", string.Format("{0} --export %1 out.h", Process.GetCurrentProcess().MainModule.FileName))
                     {
-                        Title = "Экспортировать",
+                        Title = Resources.ShellExport,
                         // TODO иконка пункта меню экспорта
                     },
                 }
@@ -479,11 +480,11 @@ namespace HID_Report_Descriptor_Editor.Utils
             {
                 helper.Register();
                 SHChangeNotify(HChangeNotifyEventID.SHCNE_ASSOCCHANGED, HChangeNotifyFlags.SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
-                MessageBox.Show("Succsess", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Resources.ExtensionRegisterSuccess, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception)
             {
-                MessageBox.Show("Error", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Resources.ExtensionRegisterError, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -493,11 +494,11 @@ namespace HID_Report_Descriptor_Editor.Utils
             {
                 helper.Unregister();
                 SHChangeNotify(HChangeNotifyEventID.SHCNE_ASSOCCHANGED, HChangeNotifyFlags.SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
-                MessageBox.Show("Succsess", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Resources.ExtensionUnregisterSuccess, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception)
             {
-                MessageBox.Show("Error", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Resources.ExtensionUnregisterError, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -26,7 +26,7 @@ bankviktor14@gmail.com</Description>
     <Compile Update="Forms\CommentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\SelectUsagePageForm.cs">
+    <Compile Update="Forms\UsagePageForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -44,7 +44,7 @@ bankviktor14@gmail.com</Description>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="examples\mouse.hid">
+    <None Update="Examples\mouse.hid">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

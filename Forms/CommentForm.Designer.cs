@@ -41,7 +41,7 @@
             this.BtnOK.Location = new System.Drawing.Point(161, 115);
             this.BtnOK.Name = "BtnOK";
             this.BtnOK.Size = new System.Drawing.Size(84, 23);
-            this.BtnOK.TabIndex = 0;
+            this.BtnOK.TabIndex = 3;
             this.BtnOK.Text = "OK";
             this.BtnOK.UseVisualStyleBackColor = true;
             // 
@@ -52,7 +52,7 @@
             this.BtnCancel.Location = new System.Drawing.Point(251, 115);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(84, 23);
-            this.BtnCancel.TabIndex = 0;
+            this.BtnCancel.TabIndex = 4;
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = true;
             // 
@@ -67,7 +67,7 @@
             this.TbComment.Name = "TbComment";
             this.TbComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.TbComment.Size = new System.Drawing.Size(323, 97);
-            this.TbComment.TabIndex = 2;
+            this.TbComment.TabIndex = 1;
             this.TbComment.Text = "Line 01\r\nLine 02\r\nLine 03\r\nLine 04\r\nLine 05\r\nLine 06";
             // 
             // BtnClear
@@ -76,7 +76,7 @@
             this.BtnClear.Location = new System.Drawing.Point(12, 115);
             this.BtnClear.Name = "BtnClear";
             this.BtnClear.Size = new System.Drawing.Size(84, 23);
-            this.BtnClear.TabIndex = 3;
+            this.BtnClear.TabIndex = 2;
             this.BtnClear.Text = "Clear";
             this.BtnClear.UseVisualStyleBackColor = true;
             this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);

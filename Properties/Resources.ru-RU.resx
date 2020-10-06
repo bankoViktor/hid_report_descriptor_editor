@@ -118,199 +118,195 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CmdHintCaption" xml:space="preserve">
-    <value>Supported command line arguments:</value>
+    <value>Поддерживаемые аргументы командной строки:</value>
   </data>
   <data name="CmdHintExport" xml:space="preserve">
-    <value>Export to C header file</value>
+    <value>Экспорт в заголовочный файл Си</value>
   </data>
   <data name="CmdHintHelp" xml:space="preserve">
-    <value>Show help for commands</value>
+    <value>Справка по аргументам командной строки</value>
   </data>
   <data name="CmdHintLanguage" xml:space="preserve">
-    <value>Language user interface</value>
+    <value>Язык интерфейса приложения</value>
   </data>
   <data name="DialogOpenFile" xml:space="preserve">
-    <value>Open file</value>
+    <value>Открыть файл</value>
   </data>
   <data name="DialogSaveAs" xml:space="preserve">
-    <value>Save As ...</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="docIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\docIcon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Сохранить как ...</value>
   </data>
   <data name="ExtensionRegisterError" xml:space="preserve">
-    <value>Error</value>
+    <value>Не удалось зарегистрировать тип файла</value>
   </data>
   <data name="ExtensionRegisterSuccess" xml:space="preserve">
-    <value>Success</value>
+    <value>Тип файла зарегистрирован</value>
   </data>
   <data name="ExtensionUnregisterError" xml:space="preserve">
-    <value>Unregister Error</value>
+    <value>Не удалось удалить тип файла.</value>
   </data>
   <data name="ExtensionUnregisterSuccess" xml:space="preserve">
-    <value>Unregister Success</value>
+    <value>Тип файла удален.</value>
   </data>
   <data name="FileExtensionCaption" xml:space="preserve">
-    <value>HID Report Descriptor</value>
+    <value>Отчетный дескриптор HID</value>
   </data>
   <data name="FileNotExist" xml:space="preserve">
-    <value>File '{0}' not exist.</value>
+    <value>Файл '{0}' не найден.</value>
     <comment>0 - file</comment>
   </data>
   <data name="FileTypeNotSupported" xml:space="preserve">
-    <value>File type '{0}' is not supported.</value>
+    <value>Тип файла '{0}' не поддерживается.</value>
     <comment>0 - file extension</comment>
   </data>
   <data name="HexEditorForm_InvalidValue" xml:space="preserve">
-    <value>Invalid value</value>
+    <value>Не верный формат</value>
   </data>
   <data name="HexEditorForm_LongDataSizeOutOfRange" xml:space="preserve">
-    <value>Long Data size out of range: 0 to 255 bytes</value>
+    <value>Размер данных не должен превышать 255 байт</value>
   </data>
   <data name="HexEditorForm_LongTagOutOfRange" xml:space="preserve">
-    <value>Long Tag out of range: 0 to 255</value>
+    <value>Тег должен быть в диапазоне: 0 - 255 (0x00 - 0xFF)</value>
   </data>
   <data name="MainForm_AddLongItem" xml:space="preserve">
-    <value>Add Long Item</value>
+    <value>Добавить длинный элемент</value>
   </data>
   <data name="MainForm_ColumnComment" xml:space="preserve">
-    <value>Comment</value>
+    <value>Комментарий</value>
   </data>
   <data name="MainForm_ColumnHex" xml:space="preserve">
     <value>HEX</value>
   </data>
   <data name="MainForm_ColumnItem" xml:space="preserve">
-    <value>Item</value>
+    <value>Элемент</value>
   </data>
   <data name="MainForm_CountBytes" xml:space="preserve">
-    <value>Total bytes: {0}</value>
+    <value>Всего байт: {0}</value>
     <comment>0 - total count report bytes</comment>
   </data>
   <data name="MainForm_CountItem" xml:space="preserve">
-    <value>Items: {0}</value>
+    <value>Элементов: {0}</value>
     <comment>0 - count report items</comment>
   </data>
   <data name="MainForm_GroupGlobal" xml:space="preserve">
-    <value>Global</value>
+    <value>Глобальные</value>
   </data>
   <data name="MainForm_GroupLocal" xml:space="preserve">
-    <value>Local</value>
+    <value>Локальные</value>
   </data>
   <data name="MainForm_GroupMain" xml:space="preserve">
-    <value>Main</value>
+    <value>Главные</value>
   </data>
   <data name="MainForm_MiEdit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Редактировать</value>
   </data>
   <data name="MainForm_MiEditComment" xml:space="preserve">
-    <value>Comment</value>
+    <value>Комментарий</value>
   </data>
   <data name="MainForm_MiEditCopy" xml:space="preserve">
-    <value>Copy</value>
+    <value>Копировать</value>
   </data>
   <data name="MainForm_MiEditCut" xml:space="preserve">
-    <value>Cut</value>
+    <value>Вырезать</value>
   </data>
   <data name="MainForm_MiEditDelete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Удалить</value>
   </data>
   <data name="MainForm_MiEditDeleteAll" xml:space="preserve">
-    <value>Delete All</value>
+    <value>Удалить все</value>
   </data>
   <data name="MainForm_MiEditMoveDown" xml:space="preserve">
-    <value>Move Down</value>
+    <value>Вниз</value>
   </data>
   <data name="MainForm_MiEditMoveUp" xml:space="preserve">
-    <value>Move Up</value>
+    <value>Вверх</value>
   </data>
   <data name="MainForm_MiEditPaste" xml:space="preserve">
-    <value>Paste</value>
+    <value>Вставить</value>
   </data>
   <data name="MainForm_MiFile" xml:space="preserve">
-    <value>File</value>
+    <value>Файл</value>
   </data>
   <data name="MainForm_MiFileExport" xml:space="preserve">
-    <value>Export</value>
+    <value>Экспорт</value>
   </data>
   <data name="MainForm_MiFileOpen" xml:space="preserve">
-    <value>Open</value>
+    <value>Открыть</value>
   </data>
   <data name="MainForm_MiFileSave" xml:space="preserve">
-    <value>Save</value>
+    <value>Сохранить</value>
   </data>
   <data name="MainForm_MiFileSaveAs" xml:space="preserve">
-    <value>Save As ...</value>
+    <value>Сохранить как ...</value>
   </data>
   <data name="MainForm_MiHelp" xml:space="preserve">
-    <value>Help</value>
+    <value>Помощь</value>
   </data>
   <data name="MainForm_MiHelpHIDSpec" xml:space="preserve">
-    <value>HID Specification</value>
+    <value>HID Спецификация</value>
   </data>
   <data name="MainForm_MiHelpHIDUsages" xml:space="preserve">
-    <value>HID Usages Tables</value>
+    <value>HID Использования</value>
   </data>
   <data name="MainForm_MiTools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Инструменты</value>
   </data>
   <data name="MainForm_MiToolsRegisterFileExt" xml:space="preserve">
-    <value>Register File Extension</value>
+    <value>Зарегистрировать тип файла</value>
   </data>
   <data name="MainForm_MiToolsUnregisterFileExt" xml:space="preserve">
-    <value>Unregister File Extension</value>
+    <value>Удаить тип файла</value>
   </data>
   <data name="MainForm_MiView" xml:space="preserve">
-    <value>View</value>
+    <value>Вид</value>
   </data>
   <data name="MainForm_MiViewReportScheme" xml:space="preserve">
-    <value>Report Scheme</value>
+    <value>Схема отчета</value>
   </data>
   <data name="MainForm_MiViewStatusBar" xml:space="preserve">
-    <value>Status Bar</value>
+    <value>Строка состояния</value>
   </data>
   <data name="MainForm_MustDefinedUsagePage" xml:space="preserve">
-    <value>You must define a Usage Page before selecting a Usage.</value>
+    <value>Перед выбором Использование вы долны опредить страницу использовыний.</value>
   </data>
   <data name="MainForm_SaveModidiedFile" xml:space="preserve">
-    <value>File has been modidied! Do you want to save it?</value>
+    <value>Файл был изменен! Сохранить изменения?</value>
   </data>
   <data name="MainForm_SetUsagesNotDefined" xml:space="preserve">
     <value>A set Usages for Usage Page '{0}' don't defined.</value>
     <comment>0 - usage page name</comment>
   </data>
   <data name="MainForm_UnnamedFile" xml:space="preserve">
-    <value>unnamed</value>
+    <value>безымянный</value>
   </data>
   <data name="NotCollectionStart" xml:space="preserve">
-    <value>Not matching Collection statrt.</value>
+    <value>Не обнаружена открытая коллекция.</value>
   </data>
   <data name="NotImplemented" xml:space="preserve">
-    <value>Not Implemented</value>
+    <value>Не реализовано.</value>
   </data>
   <data name="NumberInput_InvalidValue" xml:space="preserve">
-    <value>Invalid value</value>
+    <value>Неверное значение</value>
   </data>
   <data name="NumberInput_InvalidValueGreater" xml:space="preserve">
-    <value>The value cannot be greater than {0}</value>
+    <value>Значение не может быть больше {0}</value>
     <comment>0 - MaxValue</comment>
   </data>
   <data name="NumberInput_InvalidValueLess" xml:space="preserve">
-    <value>The value cannot be less than {0}</value>
+    <value>Значение не может быть меньше {0}</value>
     <comment>0 - MinValue</comment>
   </data>
   <data name="NumberInput_Range" xml:space="preserve">
-    <value>Range: {0} (0x{0:X}) to {1} (0x{1:X})</value>
+    <value>Диапозон: от {0} (0x{0:X}) до {1} (0x{1:X})</value>
     <comment>0 - MinValue, 1 - MaxValue</comment>
   </data>
   <data name="ShellExport" xml:space="preserve">
-    <value>Export</value>
+    <value>Экспортировать</value>
   </data>
   <data name="ShellOpen" xml:space="preserve">
-    <value>Open</value>
+    <value>Открыть</value>
   </data>
   <data name="UsageForm_SelectedUsagePage" xml:space="preserve">
-    <value>{0} from {1} (0x{2:X4})</value>
+    <value>{0} из {1} (0x{2:X4})</value>
     <comment>0 - usage name, 1 - usage page name, 2 - usage page value</comment>
   </data>
 </root>

@@ -3,6 +3,14 @@
     "Run": {
       "commandName": "Project"
     },
+    "Run En": {
+      "commandName": "Project",
+      "commandLineArgs": "--language en-US"
+    },
+    "Run Ru": {
+      "commandName": "Project",
+      "commandLineArgs": "--language ru-RU"
+    },
     "Run File": {
       "commandName": "Project",
       "commandLineArgs": "\"test.hid\""
@@ -10,6 +18,10 @@
     "Run Export": {
       "commandName": "Project",
       "commandLineArgs": "--export \"hid_report\" \"hid_desc.h\""
+    },
+    "Run Help": {
+      "commandName": "Project",
+      "commandLineArgs": "--help"
     }
   }
 }

@@ -1,9 +1,10 @@
 using HID_Report_Descriptor_Editor.Forms;
 using HID_Report_Descriptor_Editor.Items;
+using HID_Report_Descriptor_Editor.Properties;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -12,18 +13,12 @@ namespace HID_Report_Descriptor_Editor
     static class Program
     {
         public const string FileExtension = ".hid";
-        public const string FileExtensionCaption = "HID Report Descriptor";
         public const string CmdLinePrefix = "--";
         public const string UrlRepository = "https://bitbucket.org/MrWinston34/hid_report_descriptor_editor/";
 
         [STAThread]
         static void Main(string[] args)
         {
-            // TODO локализация
-            var culture = System.Globalization.CultureInfo.GetCultureInfo("en-US"); ;
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
-
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -50,12 +45,35 @@ namespace HID_Report_Descriptor_Editor
                     var pos = -1;
                     if (CheckParam(args, "h", "help", out pos) || CheckParam(args, "help", out pos, null))
                     {
-                        const int tabWidth = 5;
-                        const int pWidth = 40;
-                        var str = "Supported command line arguments:\n";
-                        str += "".PadLeft(tabWidth, ' ') + $"{CmdLinePrefix}h | {CmdLinePrefix}help".PadRight(pWidth, ' ') + "Show help for commands.\n";
-                        str += "".PadLeft(tabWidth, ' ') + $"{CmdLinePrefix}e | {CmdLinePrefix}export".PadRight(pWidth, ' ') + "Export to C header file.\n";
-                        MessageBox.Show(str, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        var fmt = "{0,6} {1} | {2,-10} {3}\r\n";
+                        var builder = new StringBuilder();
+                        builder.AppendLine(Resources.CmdHintCaption);
+                        builder.AppendLine();
+                        builder.AppendFormat(fmt, CmdLinePrefix, "h", "help", Resources.CmdHintHelp);
+                        builder.AppendFormat(fmt, CmdLinePrefix, "l", "language", Resources.CmdHintLanguage);
+                        builder.AppendFormat(fmt, CmdLinePrefix, "e", "export", Resources.CmdHintExport);
+                        var dlg = new CmdArgsHelpForm()
+                        {
+                            Text = Application.ProductName,
+                            Caption = builder.ToString()
+                        };
+                        dlg.ShowDialog();
+                    }
+                    else if (CheckParam(args, "l", "language", out pos))
+                    {
+                        try
+                        {
+                            if (args.Length > pos)
+                            {
+                                var culture = System.Globalization.CultureInfo.GetCultureInfo(args[pos + 1]);
+                                Thread.CurrentThread.CurrentCulture = culture;
+                                Thread.CurrentThread.CurrentUICulture = culture;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                        }
+                        Application.Run(new MainForm());
                     }
                     else if (CheckParam(args, "e", "export", out pos))
                     {
@@ -73,11 +91,12 @@ namespace HID_Report_Descriptor_Editor
                                     Export(reportItems, hdrFile);
                                 }
                                 else
-                                    MessageBox.Show($"File type '{ext}' is not supported.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(string.Format(Resources.FileTypeNotSupported, ext), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         catch (Exception)
                         {
+                            // TODO Not defined hid file
                             MessageBox.Show("Not defined hid file and/or header file.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
@@ -95,10 +114,10 @@ namespace HID_Report_Descriptor_Editor
                     return true;
                 }
                 else
-                    MessageBox.Show($"File type '{ext}' is not supported.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Format(Resources.FileTypeNotSupported, ext), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-                MessageBox.Show($"File '{filename}' not exist.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format(Resources.FileNotExist, filename), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             return false;
         }
@@ -134,14 +153,14 @@ namespace HID_Report_Descriptor_Editor
                     return true;
                 }
             }
-               
+
             position = -1;
             return false;
         }
 
         public static void Export(HIDReportItemCollection reportItems, string filename)
         {
-            throw new NotImplementedException();
+            MessageBox.Show(Resources.NotImplemented, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             /*
             int size = reportItems.Sum(i => i.GetBytes().Length);
             var def = Path.GetFileName(filename).ToUpper().Replace(' ', '_').Replace('.', '_');
@@ -182,6 +201,5 @@ namespace HID_Report_Descriptor_Editor
             writer.Close();
             */
         }
-       
     }
 }

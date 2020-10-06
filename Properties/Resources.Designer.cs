@@ -61,12 +61,561 @@ namespace HID_Report_Descriptor_Editor.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Supported command line arguments:.
+        /// </summary>
+        internal static string CmdHintCaption {
+            get {
+                return ResourceManager.GetString("CmdHintCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Export to C header file.
+        /// </summary>
+        internal static string CmdHintExport {
+            get {
+                return ResourceManager.GetString("CmdHintExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Show help for commands.
+        /// </summary>
+        internal static string CmdHintHelp {
+            get {
+                return ResourceManager.GetString("CmdHintHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Language user interface.
+        /// </summary>
+        internal static string CmdHintLanguage {
+            get {
+                return ResourceManager.GetString("CmdHintLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Open file.
+        /// </summary>
+        internal static string DialogOpenFile {
+            get {
+                return ResourceManager.GetString("DialogOpenFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Save As ....
+        /// </summary>
+        internal static string DialogSaveAs {
+            get {
+                return ResourceManager.GetString("DialogSaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
         /// </summary>
         internal static System.Drawing.Icon docIcon {
             get {
                 object obj = ResourceManager.GetObject("docIcon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Error.
+        /// </summary>
+        internal static string ExtensionRegisterError {
+            get {
+                return ResourceManager.GetString("ExtensionRegisterError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Success.
+        /// </summary>
+        internal static string ExtensionRegisterSuccess {
+            get {
+                return ResourceManager.GetString("ExtensionRegisterSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unregister Error.
+        /// </summary>
+        internal static string ExtensionUnregisterError {
+            get {
+                return ResourceManager.GetString("ExtensionUnregisterError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unregister Success.
+        /// </summary>
+        internal static string ExtensionUnregisterSuccess {
+            get {
+                return ResourceManager.GetString("ExtensionUnregisterSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на HID Report Descriptor.
+        /// </summary>
+        internal static string FileExtensionCaption {
+            get {
+                return ResourceManager.GetString("FileExtensionCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на File &apos;{0}&apos; not exist..
+        /// </summary>
+        internal static string FileNotExist {
+            get {
+                return ResourceManager.GetString("FileNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на File type &apos;{0}&apos; is not supported..
+        /// </summary>
+        internal static string FileTypeNotSupported {
+            get {
+                return ResourceManager.GetString("FileTypeNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Invalid value.
+        /// </summary>
+        internal static string HexEditorForm_InvalidValue {
+            get {
+                return ResourceManager.GetString("HexEditorForm_InvalidValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Long Data size out of range: 0 to 255 bytes.
+        /// </summary>
+        internal static string HexEditorForm_LongDataSizeOutOfRange {
+            get {
+                return ResourceManager.GetString("HexEditorForm_LongDataSizeOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Long Tag out of range: 0 to 255.
+        /// </summary>
+        internal static string HexEditorForm_LongTagOutOfRange {
+            get {
+                return ResourceManager.GetString("HexEditorForm_LongTagOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Add Long Item.
+        /// </summary>
+        internal static string MainForm_AddLongItem {
+            get {
+                return ResourceManager.GetString("MainForm_AddLongItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Comment.
+        /// </summary>
+        internal static string MainForm_ColumnComment {
+            get {
+                return ResourceManager.GetString("MainForm_ColumnComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на HEX.
+        /// </summary>
+        internal static string MainForm_ColumnHex {
+            get {
+                return ResourceManager.GetString("MainForm_ColumnHex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Item.
+        /// </summary>
+        internal static string MainForm_ColumnItem {
+            get {
+                return ResourceManager.GetString("MainForm_ColumnItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Total bytes: {0}.
+        /// </summary>
+        internal static string MainForm_CountBytes {
+            get {
+                return ResourceManager.GetString("MainForm_CountBytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Items: {0}.
+        /// </summary>
+        internal static string MainForm_CountItem {
+            get {
+                return ResourceManager.GetString("MainForm_CountItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Global.
+        /// </summary>
+        internal static string MainForm_GroupGlobal {
+            get {
+                return ResourceManager.GetString("MainForm_GroupGlobal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Local.
+        /// </summary>
+        internal static string MainForm_GroupLocal {
+            get {
+                return ResourceManager.GetString("MainForm_GroupLocal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Main.
+        /// </summary>
+        internal static string MainForm_GroupMain {
+            get {
+                return ResourceManager.GetString("MainForm_GroupMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Edit.
+        /// </summary>
+        internal static string MainForm_MiEdit {
+            get {
+                return ResourceManager.GetString("MainForm_MiEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Comment.
+        /// </summary>
+        internal static string MainForm_MiEditComment {
+            get {
+                return ResourceManager.GetString("MainForm_MiEditComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Copy.
+        /// </summary>
+        internal static string MainForm_MiEditCopy {
+            get {
+                return ResourceManager.GetString("MainForm_MiEditCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Cut.
+        /// </summary>
+        internal static string MainForm_MiEditCut {
+            get {
+                return ResourceManager.GetString("MainForm_MiEditCut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Delete.
+        /// </summary>
+        internal static string MainForm_MiEditDelete {
+            get {
+                return ResourceManager.GetString("MainForm_MiEditDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Delete All.
+        /// </summary>
+        internal static string MainForm_MiEditDeleteAll {
+            get {
+                return ResourceManager.GetString("MainForm_MiEditDeleteAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Move Down.
+        /// </summary>
+        internal static string MainForm_MiEditMoveDown {
+            get {
+                return ResourceManager.GetString("MainForm_MiEditMoveDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Move Up.
+        /// </summary>
+        internal static string MainForm_MiEditMoveUp {
+            get {
+                return ResourceManager.GetString("MainForm_MiEditMoveUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Paste.
+        /// </summary>
+        internal static string MainForm_MiEditPaste {
+            get {
+                return ResourceManager.GetString("MainForm_MiEditPaste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на File.
+        /// </summary>
+        internal static string MainForm_MiFile {
+            get {
+                return ResourceManager.GetString("MainForm_MiFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Export.
+        /// </summary>
+        internal static string MainForm_MiFileExport {
+            get {
+                return ResourceManager.GetString("MainForm_MiFileExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Open.
+        /// </summary>
+        internal static string MainForm_MiFileOpen {
+            get {
+                return ResourceManager.GetString("MainForm_MiFileOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Save.
+        /// </summary>
+        internal static string MainForm_MiFileSave {
+            get {
+                return ResourceManager.GetString("MainForm_MiFileSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Save As ....
+        /// </summary>
+        internal static string MainForm_MiFileSaveAs {
+            get {
+                return ResourceManager.GetString("MainForm_MiFileSaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Help.
+        /// </summary>
+        internal static string MainForm_MiHelp {
+            get {
+                return ResourceManager.GetString("MainForm_MiHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на HID Specification.
+        /// </summary>
+        internal static string MainForm_MiHelpHIDSpec {
+            get {
+                return ResourceManager.GetString("MainForm_MiHelpHIDSpec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на HID Usages Tables.
+        /// </summary>
+        internal static string MainForm_MiHelpHIDUsages {
+            get {
+                return ResourceManager.GetString("MainForm_MiHelpHIDUsages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Tools.
+        /// </summary>
+        internal static string MainForm_MiTools {
+            get {
+                return ResourceManager.GetString("MainForm_MiTools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Register File Extension.
+        /// </summary>
+        internal static string MainForm_MiToolsRegisterFileExt {
+            get {
+                return ResourceManager.GetString("MainForm_MiToolsRegisterFileExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unregister File Extension.
+        /// </summary>
+        internal static string MainForm_MiToolsUnregisterFileExt {
+            get {
+                return ResourceManager.GetString("MainForm_MiToolsUnregisterFileExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на View.
+        /// </summary>
+        internal static string MainForm_MiView {
+            get {
+                return ResourceManager.GetString("MainForm_MiView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Report Scheme.
+        /// </summary>
+        internal static string MainForm_MiViewReportScheme {
+            get {
+                return ResourceManager.GetString("MainForm_MiViewReportScheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Status Bar.
+        /// </summary>
+        internal static string MainForm_MiViewStatusBar {
+            get {
+                return ResourceManager.GetString("MainForm_MiViewStatusBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на You must define a Usage Page before selecting a Usage..
+        /// </summary>
+        internal static string MainForm_MustDefinedUsagePage {
+            get {
+                return ResourceManager.GetString("MainForm_MustDefinedUsagePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на File has been modidied! Do you want to save it?.
+        /// </summary>
+        internal static string MainForm_SaveModidiedFile {
+            get {
+                return ResourceManager.GetString("MainForm_SaveModidiedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на A set Usages for Usage Page &apos;{0}&apos; don&apos;t defined..
+        /// </summary>
+        internal static string MainForm_SetUsagesNotDefined {
+            get {
+                return ResourceManager.GetString("MainForm_SetUsagesNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на unnamed.
+        /// </summary>
+        internal static string MainForm_UnnamedFile {
+            get {
+                return ResourceManager.GetString("MainForm_UnnamedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Not matching Collection statrt..
+        /// </summary>
+        internal static string NotCollectionStart {
+            get {
+                return ResourceManager.GetString("NotCollectionStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Not Implemented.
+        /// </summary>
+        internal static string NotImplemented {
+            get {
+                return ResourceManager.GetString("NotImplemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Invalid value.
+        /// </summary>
+        internal static string NumberInput_InvalidValue {
+            get {
+                return ResourceManager.GetString("NumberInput_InvalidValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The value cannot be greater than {0}.
+        /// </summary>
+        internal static string NumberInput_InvalidValueGreater {
+            get {
+                return ResourceManager.GetString("NumberInput_InvalidValueGreater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The value cannot be less than {0}.
+        /// </summary>
+        internal static string NumberInput_InvalidValueLess {
+            get {
+                return ResourceManager.GetString("NumberInput_InvalidValueLess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Range: {0} (0x{0:X}) to {1} (0x{1:X}).
+        /// </summary>
+        internal static string NumberInput_Range {
+            get {
+                return ResourceManager.GetString("NumberInput_Range", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Export.
+        /// </summary>
+        internal static string ShellExport {
+            get {
+                return ResourceManager.GetString("ShellExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Open.
+        /// </summary>
+        internal static string ShellOpen {
+            get {
+                return ResourceManager.GetString("ShellOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {0} from {1} (0x{2:X4}).
+        /// </summary>
+        internal static string UsageForm_SelectedUsagePage {
+            get {
+                return ResourceManager.GetString("UsageForm_SelectedUsagePage", resourceCulture);
             }
         }
     }

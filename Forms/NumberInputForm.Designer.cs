@@ -28,11 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.BtnOK = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.RbDEC = new System.Windows.Forms.RadioButton();
             this.RbHEX = new System.Windows.Forms.RadioButton();
             this.TbValue = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.LabelRange = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnOK
@@ -69,7 +73,7 @@
             this.RbDEC.TabStop = true;
             this.RbDEC.Text = "DEC";
             this.RbDEC.UseVisualStyleBackColor = true;
-            this.RbDEC.CheckedChanged += new System.EventHandler(this.RbDEC_CheckedChanged_1);
+            this.RbDEC.CheckedChanged += new System.EventHandler(this.RbDEC_CheckedChanged);
             // 
             // RbHEX
             // 
@@ -85,10 +89,27 @@
             // 
             // TbValue
             // 
+            this.TbValue.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TbValue.Location = new System.Drawing.Point(12, 23);
+            this.TbValue.MaxLength = 100;
             this.TbValue.Name = "TbValue";
             this.TbValue.Size = new System.Drawing.Size(233, 23);
             this.TbValue.TabIndex = 2;
+            this.TbValue.WordWrap = false;
+            this.TbValue.Validating += new System.ComponentModel.CancelEventHandler(this.TbValue_Validating);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // LabelRange
+            // 
+            this.LabelRange.AutoSize = true;
+            this.LabelRange.Location = new System.Drawing.Point(12, 53);
+            this.LabelRange.Name = "LabelRange";
+            this.LabelRange.Size = new System.Drawing.Size(43, 15);
+            this.LabelRange.TabIndex = 3;
+            this.LabelRange.Text = "Range:";
             // 
             // NumberInputForm
             // 
@@ -97,6 +118,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(347, 130);
+            this.Controls.Add(this.LabelRange);
             this.Controls.Add(this.TbValue);
             this.Controls.Add(this.RbHEX);
             this.Controls.Add(this.RbDEC);
@@ -108,6 +130,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Input Number";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,5 +143,7 @@
         private System.Windows.Forms.RadioButton RbDEC;
         private System.Windows.Forms.RadioButton RbHEX;
         private System.Windows.Forms.TextBox TbValue;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label LabelRange;
     }
 }

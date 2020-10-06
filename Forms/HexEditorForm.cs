@@ -1,57 +1,106 @@
-﻿using HID_Report_Descriptor_Editor.Utils;
+﻿using HID_Report_Descriptor_Editor.Properties;
+using HID_Report_Descriptor_Editor.Utils;
+using System;
+using System.ComponentModel;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace HID_Report_Descriptor_Editor.Forms
 {
     public partial class HexEditorForm : Form, IDialogValue
     {
-        private byte[] innerValue;
         public object Value
         {
-            get => innerValue;
-            set => innerValue = value is byte[]? value as byte[] : null;
+            get => TryBytesDumnParse(TbDump.Text.Replace(" ", ""), out byte[] buffer) ? buffer : null;
+            set
+            {
+                if (value != null && value is byte[] buffer)
+                {
+                    TbDump.Text = BitConverter.ToString(buffer, 0).Replace("-", " ");
+                }
+            }
+        }
+
+        public byte LongTag
+        {
+            get => byte.Parse(TbLongTag.Text, NumberStyles.HexNumber);
+            set => TbLongTag.Text = value.ToString("X");
         }
 
         public HexEditorForm()
         {
             InitializeComponent();
-
-            Value = new byte[]
-            {
-                0x7B, 0x23, 0x00, 0x00, 0x04, 0x09, 0x6F, 0x3C,
-                0x09, 0xF1, 0xF3, 0xEF, 0xE5, 0xF0, 0x20, 0xF0, 
-                0xF3, 0xF1, 0xF1, 0xEA, 0xE8, 0xE9, 0x20, 0xF2, 
-                0xE5, 0xEA, 0xF1, 0xF2, 0x00, 0x01, 0x03, 0x00,
-                0x00, 0x00, 0x06, 0xDD, 0xE0, 0x00, 0x00, 0x00,
-                0x06, 0x09, 0x6F, 0x2F, 0x00, 0x00, 0x06, 0x58,
-                0x17, 0x6A, 0x59, 0x03, 0x33, 0x44, 0x07, 0x6F,
-                0x31, 0x00, 0x00, 0x06, 0x2C, 0x3C, 0x07, 0x6F,
-                0x31, 0x00, 0x00, 0x06, 0x75, 0x1A, 0x00, 0x00,
-                0x69, 0x73, 0x20, 0x70, 0x72, 0x6F, 0x67, 0x72,
-                0x61, 0x6D, 0x20, 0x63, 0x61, 0x6E, 0x6E, 0x6F,
-                0x02, 0x13, 0x05, 0x11, 0x05, 0x2C, 0x2B, 0x11,
-                0x05, 0x04, 0x6F, 0xE6, 0x01, 0x00, 0x06, 0x09,
-                0x17, 0x6A, 0x6F, 0xAA, 0x00, 0x00, 0x06, 0x09,
-                0x6F, 0x2F, 0x00, 0x00, 0x06, 0x16, 0x6A, 0x33,
-                0x0C, 0x02, 0x7B, 0x23, 0x00, 0x00, 0x04, 0x09,
-                0x6F, 0x3C, 0x00, 0x00, 0x06, 0xDD, 0x8E, 0x00,
-                0x00, 0x00, 0x14, 0x13, 0x06, 0x03, 0x06, 0x31,
-                0x10, 0x09, 0x6F, 0xA7, 0x00, 0x00, 0x06, 0x03,
-                0x06, 0x59, 0x73, 0xA6, 0x00, 0x00, 0x06, 0x13,
-                0x06, 0x14, 0x13, 0x07, 0x03, 0x06, 0x09, 0x6F,
-                0x2F, 0x00, 0x00, 0x06, 0x58, 0x17, 0x6A, 0x59,
-                0x2F, 0x21, 0x09, 0x6F, 0xA7, 0x00, 0x00, 0x06,
-                0x03, 0x58, 0x06, 0x59, 0x17, 0x6A, 0x58, 0x09,
-                0x6F, 0x2F, 0x00, 0x00, 0x06, 0x03, 0x06, 0x59,
-                0x17, 0x6A, 0x58, 0x59, 0x73, 0xA6, 0x00, 0x00,
-                0x06, 0x13, 0x07, 0x02, 0x7B, 0x23, 0x00, 0x00,
-                0x04, 0x04, 0x04, 0x04, 0x59, 0x73, 0xA6, 0x00
-            };
-
-            hexEditor1.Data = innerValue;
         }
 
+        private void TbLongTag_Validating(object sender, CancelEventArgs e)
+        {
+            if (int.TryParse(TbLongTag.Text, NumberStyles.HexNumber, null, out int value))
+            {
+                if (value >= 0 && value <= 255)
+                {
+                    errorProvider1.SetError(TbLongTag, string.Empty);
+                }
+                else
+                {
+                    errorProvider1.SetError(TbLongTag, Resources.HexEditorForm_LongTagOutOfRange);
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                errorProvider1.SetError(TbLongTag, Resources.HexEditorForm_LongDataSizeOutOfRange);
+                e.Cancel = true;
+            }
+        }
 
-        // TODO LONG - 255 байт данных
+        private void TbDump_Validating(object sender, CancelEventArgs e)
+        {
+            if (TryBytesDumnParse(TbDump.Text.Replace(" ", ""), out byte[] buffer))
+            {
+                if (buffer.Length <= 255)
+                {
+                    errorProvider1.SetError(TbDump, string.Empty);
+                }
+                else
+                {
+                    errorProvider1.SetError(TbDump, Resources.HexEditorForm_LongDataSizeOutOfRange);
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                errorProvider1.SetError(TbDump, Resources.HexEditorForm_InvalidValue);
+                e.Cancel = true;
+            }
+        }
+
+        public bool TryBytesDumnParse(string hex, out byte[] buffer)
+        {
+            if (hex.Length % 2 == 1)
+            {
+                buffer = null;
+                return false;
+            }
+
+            buffer = new byte[hex.Length >> 1];
+
+            for (int i = 0; i < hex.Length >> 1; ++i)
+            {
+                buffer[i] = (byte)((GetHexVal(hex[i << 1]) << 4) + (GetHexVal(hex[(i << 1) + 1])));
+            }
+
+            return true;
+        }
+
+        public static int GetHexVal(char hex)
+        {
+            int val = hex;
+            //For uppercase A-F letters:
+            //return val - (val < 58 ? 48 : 55);
+            //For lowercase a-f letters:
+            //return val - (val < 58 ? 48 : 87);
+            //Or the two combined, but a bit slower:
+            return val - (val < 58 ? 48 : (val < 97 ? 55 : 87));
+        }
     }
 }

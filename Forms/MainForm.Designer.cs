@@ -79,21 +79,15 @@
             // 
             // ListReportItems
             // 
-            this.ListReportItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.ListReportItems, "ListReportItems");
             this.ListReportItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnItem,
             this.ColumnHex,
             this.СolumnComment});
             this.ListReportItems.ContextMenuStrip = this.ContextMenuEdit;
-            this.ListReportItems.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ListReportItems.FullRowSelect = true;
             this.ListReportItems.HideSelection = false;
-            this.ListReportItems.Location = new System.Drawing.Point(214, 27);
             this.ListReportItems.Name = "ListReportItems";
-            this.ListReportItems.Size = new System.Drawing.Size(970, 602);
-            this.ListReportItems.TabIndex = 1;
             this.ListReportItems.UseCompatibleStateImageBehavior = false;
             this.ListReportItems.View = System.Windows.Forms.View.Details;
             this.ListReportItems.SelectedIndexChanged += new System.EventHandler(this.ListItems_SelectedIndexChanged);
@@ -101,18 +95,15 @@
             // 
             // ColumnItem
             // 
-            this.ColumnItem.Text = "Item";
-            this.ColumnItem.Width = 550;
+            resources.ApplyResources(this.ColumnItem, "ColumnItem");
             // 
             // ColumnHex
             // 
-            this.ColumnHex.Text = "HEX";
-            this.ColumnHex.Width = 170;
+            resources.ApplyResources(this.ColumnHex, "ColumnHex");
             // 
             // СolumnComment
             // 
-            this.СolumnComment.Text = "Comment";
-            this.СolumnComment.Width = 220;
+            resources.ApplyResources(this.СolumnComment, "СolumnComment");
             // 
             // ContextMenuEdit
             // 
@@ -130,94 +121,76 @@
             this.SmEditSelectAll,
             this.SmEditDeleteAll});
             this.ContextMenuEdit.Name = "ContextMenuStrip";
-            this.ContextMenuEdit.OwnerItem = this.SmEdit;
-            this.ContextMenuEdit.Size = new System.Drawing.Size(195, 220);
+            resources.ApplyResources(this.ContextMenuEdit, "ContextMenuEdit");
             // 
             // SmEditComment
             // 
             this.SmEditComment.Name = "SmEditComment";
-            this.SmEditComment.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.SmEditComment.Size = new System.Drawing.Size(194, 22);
-            this.SmEditComment.Text = "Edit comment";
+            resources.ApplyResources(this.SmEditComment, "SmEditComment");
             this.SmEditComment.Click += new System.EventHandler(this.SmEditComment_Click);
             // 
             // SmEditSeparator1
             // 
             this.SmEditSeparator1.Name = "SmEditSeparator1";
-            this.SmEditSeparator1.Size = new System.Drawing.Size(191, 6);
+            resources.ApplyResources(this.SmEditSeparator1, "SmEditSeparator1");
             // 
             // SmEditCut
             // 
             this.SmEditCut.Name = "SmEditCut";
-            this.SmEditCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.SmEditCut.Size = new System.Drawing.Size(194, 22);
-            this.SmEditCut.Text = "Cut";
+            resources.ApplyResources(this.SmEditCut, "SmEditCut");
             // 
             // SmEditCopy
             // 
             this.SmEditCopy.Name = "SmEditCopy";
-            this.SmEditCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.SmEditCopy.Size = new System.Drawing.Size(194, 22);
-            this.SmEditCopy.Text = "Copy";
+            resources.ApplyResources(this.SmEditCopy, "SmEditCopy");
             // 
             // SmEditPaste
             // 
             this.SmEditPaste.Name = "SmEditPaste";
-            this.SmEditPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.SmEditPaste.Size = new System.Drawing.Size(194, 22);
-            this.SmEditPaste.Text = "Paste";
+            resources.ApplyResources(this.SmEditPaste, "SmEditPaste");
             // 
             // SmEditDelete
             // 
             this.SmEditDelete.Name = "SmEditDelete";
-            this.SmEditDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.SmEditDelete.Size = new System.Drawing.Size(194, 22);
-            this.SmEditDelete.Text = "Delete";
+            resources.ApplyResources(this.SmEditDelete, "SmEditDelete");
             this.SmEditDelete.Click += new System.EventHandler(this.SmEditDelete_Click);
             // 
             // SmEditSeparator2
             // 
             this.SmEditSeparator2.Name = "SmEditSeparator2";
-            this.SmEditSeparator2.Size = new System.Drawing.Size(191, 6);
+            resources.ApplyResources(this.SmEditSeparator2, "SmEditSeparator2");
             // 
             // SmEditMoveUp
             // 
             this.SmEditMoveUp.Name = "SmEditMoveUp";
-            this.SmEditMoveUp.Size = new System.Drawing.Size(194, 22);
-            this.SmEditMoveUp.Text = "Up";
+            resources.ApplyResources(this.SmEditMoveUp, "SmEditMoveUp");
             // 
             // SmEditMoveDown
             // 
             this.SmEditMoveDown.Name = "SmEditMoveDown";
-            this.SmEditMoveDown.Size = new System.Drawing.Size(194, 22);
-            this.SmEditMoveDown.Text = "Down";
+            resources.ApplyResources(this.SmEditMoveDown, "SmEditMoveDown");
             // 
             // SmEditSeparator3
             // 
             this.SmEditSeparator3.Name = "SmEditSeparator3";
-            this.SmEditSeparator3.Size = new System.Drawing.Size(191, 6);
+            resources.ApplyResources(this.SmEditSeparator3, "SmEditSeparator3");
             // 
             // SmEditSelectAll
             // 
             this.SmEditSelectAll.Name = "SmEditSelectAll";
-            this.SmEditSelectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.SmEditSelectAll.Size = new System.Drawing.Size(194, 22);
-            this.SmEditSelectAll.Text = "Select All";
+            resources.ApplyResources(this.SmEditSelectAll, "SmEditSelectAll");
             this.SmEditSelectAll.Click += new System.EventHandler(this.SmEditSelectAll_Click);
             // 
             // SmEditDeleteAll
             // 
             this.SmEditDeleteAll.Name = "SmEditDeleteAll";
-            this.SmEditDeleteAll.Size = new System.Drawing.Size(194, 22);
-            this.SmEditDeleteAll.Text = "Delete All";
+            resources.ApplyResources(this.SmEditDeleteAll, "SmEditDeleteAll");
             this.SmEditDeleteAll.Click += new System.EventHandler(this.SmEditDeleteAll_Click);
             // 
             // SmEdit
             // 
-            this.SmEdit.DropDown = this.ContextMenuEdit;
             this.SmEdit.Name = "SmEdit";
-            this.SmEdit.Size = new System.Drawing.Size(39, 20);
-            this.SmEdit.Text = "Edit";
+            resources.ApplyResources(this.SmEdit, "SmEdit");
             // 
             // MainMenuStrip1
             // 
@@ -227,11 +200,8 @@
             this.SmView,
             this.SmTools,
             this.SmHelp});
-            this.MainMenuStrip1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.MainMenuStrip1, "MainMenuStrip1");
             this.MainMenuStrip1.Name = "MainMenuStrip1";
-            this.MainMenuStrip1.Size = new System.Drawing.Size(1196, 24);
-            this.MainMenuStrip1.TabIndex = 2;
-            this.MainMenuStrip1.Text = "MainMenuStrip";
             // 
             // SmFile
             // 
@@ -241,41 +211,30 @@
             this.SmFileSaveAs,
             this.SmFileExport});
             this.SmFile.Name = "SmFile";
-            this.SmFile.Size = new System.Drawing.Size(37, 20);
-            this.SmFile.Text = "File";
+            resources.ApplyResources(this.SmFile, "SmFile");
             // 
             // SmFileOpen
             // 
             this.SmFileOpen.Name = "SmFileOpen";
-            this.SmFileOpen.ShortcutKeyDisplayString = "";
-            this.SmFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.SmFileOpen.Size = new System.Drawing.Size(148, 22);
-            this.SmFileOpen.Text = "Open";
+            resources.ApplyResources(this.SmFileOpen, "SmFileOpen");
             this.SmFileOpen.Click += new System.EventHandler(this.SmFileOpen_Click);
             // 
             // SmFileSave
             // 
             this.SmFileSave.Name = "SmFileSave";
-            this.SmFileSave.ShortcutKeyDisplayString = "";
-            this.SmFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.SmFileSave.Size = new System.Drawing.Size(148, 22);
-            this.SmFileSave.Text = "Save";
+            resources.ApplyResources(this.SmFileSave, "SmFileSave");
             this.SmFileSave.Click += new System.EventHandler(this.SmFileSave_Click);
             // 
             // SmFileSaveAs
             // 
             this.SmFileSaveAs.Name = "SmFileSaveAs";
-            this.SmFileSaveAs.Size = new System.Drawing.Size(148, 22);
-            this.SmFileSaveAs.Text = "Save As ...";
+            resources.ApplyResources(this.SmFileSaveAs, "SmFileSaveAs");
             this.SmFileSaveAs.Click += new System.EventHandler(this.SmFileSaveAs_Click);
             // 
             // SmFileExport
             // 
             this.SmFileExport.Name = "SmFileExport";
-            this.SmFileExport.ShortcutKeyDisplayString = "";
-            this.SmFileExport.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.SmFileExport.Size = new System.Drawing.Size(148, 22);
-            this.SmFileExport.Text = "Export";
+            resources.ApplyResources(this.SmFileExport, "SmFileExport");
             this.SmFileExport.Click += new System.EventHandler(this.SmFileExport_Click);
             // 
             // SmView
@@ -284,24 +243,21 @@
             this.SmViewStatusBar,
             this.SmViewReportScheme});
             this.SmView.Name = "SmView";
-            this.SmView.Size = new System.Drawing.Size(44, 20);
-            this.SmView.Text = "View";
+            resources.ApplyResources(this.SmView, "SmView");
             // 
             // SmViewStatusBar
             // 
             this.SmViewStatusBar.Checked = true;
             this.SmViewStatusBar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.SmViewStatusBar.Name = "SmViewStatusBar";
-            this.SmViewStatusBar.Size = new System.Drawing.Size(154, 22);
-            this.SmViewStatusBar.Text = "Status Bar";
+            resources.ApplyResources(this.SmViewStatusBar, "SmViewStatusBar");
             // 
             // SmViewReportScheme
             // 
             this.SmViewReportScheme.Checked = true;
             this.SmViewReportScheme.CheckState = System.Windows.Forms.CheckState.Checked;
             this.SmViewReportScheme.Name = "SmViewReportScheme";
-            this.SmViewReportScheme.Size = new System.Drawing.Size(154, 22);
-            this.SmViewReportScheme.Text = "Report Scheme";
+            resources.ApplyResources(this.SmViewReportScheme, "SmViewReportScheme");
             // 
             // SmTools
             // 
@@ -309,21 +265,18 @@
             this.SmToolsRegisterFileExt,
             this.SmToolsUnregisterFileExt});
             this.SmTools.Name = "SmTools";
-            this.SmTools.Size = new System.Drawing.Size(46, 20);
-            this.SmTools.Text = "Tools";
+            resources.ApplyResources(this.SmTools, "SmTools");
             // 
             // SmToolsRegisterFileExt
             // 
             this.SmToolsRegisterFileExt.Name = "SmToolsRegisterFileExt";
-            this.SmToolsRegisterFileExt.Size = new System.Drawing.Size(201, 22);
-            this.SmToolsRegisterFileExt.Text = "Register file extension";
+            resources.ApplyResources(this.SmToolsRegisterFileExt, "SmToolsRegisterFileExt");
             this.SmToolsRegisterFileExt.Click += new System.EventHandler(this.SmToolsRegisterFileExt_Click);
             // 
             // SmToolsUnregisterFileExt
             // 
             this.SmToolsUnregisterFileExt.Name = "SmToolsUnregisterFileExt";
-            this.SmToolsUnregisterFileExt.Size = new System.Drawing.Size(201, 22);
-            this.SmToolsUnregisterFileExt.Text = "Unregister file extension";
+            resources.ApplyResources(this.SmToolsUnregisterFileExt, "SmToolsUnregisterFileExt");
             this.SmToolsUnregisterFileExt.Click += new System.EventHandler(this.SmToolsUnregisterFileExt_Click);
             // 
             // SmHelp
@@ -334,33 +287,29 @@
             this.SmHelpSeparator1,
             this.SmHelpAbout});
             this.SmHelp.Name = "SmHelp";
-            this.SmHelp.Size = new System.Drawing.Size(44, 20);
-            this.SmHelp.Text = "Help";
+            resources.ApplyResources(this.SmHelp, "SmHelp");
             // 
             // SmHelpHIDSpec
             // 
             this.SmHelpHIDSpec.Name = "SmHelpHIDSpec";
-            this.SmHelpHIDSpec.Size = new System.Drawing.Size(165, 22);
-            this.SmHelpHIDSpec.Text = "HID Specification";
+            resources.ApplyResources(this.SmHelpHIDSpec, "SmHelpHIDSpec");
             this.SmHelpHIDSpec.Click += new System.EventHandler(this.SmHelpHIDSpec_Click);
             // 
             // SmHelpHIDUsages
             // 
             this.SmHelpHIDUsages.Name = "SmHelpHIDUsages";
-            this.SmHelpHIDUsages.Size = new System.Drawing.Size(165, 22);
-            this.SmHelpHIDUsages.Text = "HID Usage Tables";
+            resources.ApplyResources(this.SmHelpHIDUsages, "SmHelpHIDUsages");
             this.SmHelpHIDUsages.Click += new System.EventHandler(this.SmHelpHIDUsages_Click);
             // 
             // SmHelpSeparator1
             // 
             this.SmHelpSeparator1.Name = "SmHelpSeparator1";
-            this.SmHelpSeparator1.Size = new System.Drawing.Size(162, 6);
+            resources.ApplyResources(this.SmHelpSeparator1, "SmHelpSeparator1");
             // 
             // SmHelpAbout
             // 
             this.SmHelpAbout.Name = "SmHelpAbout";
-            this.SmHelpAbout.Size = new System.Drawing.Size(165, 22);
-            this.SmHelpAbout.Text = "About";
+            resources.ApplyResources(this.SmHelpAbout, "SmHelpAbout");
             this.SmHelpAbout.Click += new System.EventHandler(this.SmHelpAbout_Click);
             // 
             // StatusStrip1
@@ -369,81 +318,60 @@
             this.StatusBarSpring,
             this.StatusBarElementCount,
             this.StatusBarByteCount});
-            this.StatusStrip1.Location = new System.Drawing.Point(0, 632);
+            resources.ApplyResources(this.StatusStrip1, "StatusStrip1");
             this.StatusStrip1.Name = "StatusStrip1";
-            this.StatusStrip1.Size = new System.Drawing.Size(1196, 22);
-            this.StatusStrip1.TabIndex = 4;
-            this.StatusStrip1.Text = "statusStrip1";
             // 
             // StatusBarSpring
             // 
             this.StatusBarSpring.Name = "StatusBarSpring";
-            this.StatusBarSpring.Size = new System.Drawing.Size(881, 17);
+            resources.ApplyResources(this.StatusBarSpring, "StatusBarSpring");
             this.StatusBarSpring.Spring = true;
             // 
             // StatusBarElementCount
             // 
-            this.StatusBarElementCount.AutoSize = false;
+            resources.ApplyResources(this.StatusBarElementCount, "StatusBarElementCount");
             this.StatusBarElementCount.Name = "StatusBarElementCount";
-            this.StatusBarElementCount.Size = new System.Drawing.Size(150, 17);
-            this.StatusBarElementCount.Text = "StatusBarElementCount";
             // 
             // StatusBarByteCount
             // 
-            this.StatusBarByteCount.AutoSize = false;
+            resources.ApplyResources(this.StatusBarByteCount, "StatusBarByteCount");
             this.StatusBarByteCount.Name = "StatusBarByteCount";
-            this.StatusBarByteCount.Size = new System.Drawing.Size(150, 17);
-            this.StatusBarByteCount.Text = "StatusBarByteCount";
             // 
             // ListPaletteItems
             // 
-            this.ListPaletteItems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            resources.ApplyResources(this.ListPaletteItems, "ListPaletteItems");
             this.ListPaletteItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnItemName});
-            this.ListPaletteItems.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ListPaletteItems.FullRowSelect = true;
             this.ListPaletteItems.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.ListPaletteItems.HideSelection = false;
-            this.ListPaletteItems.LabelWrap = false;
-            this.ListPaletteItems.Location = new System.Drawing.Point(12, 27);
             this.ListPaletteItems.MultiSelect = false;
             this.ListPaletteItems.Name = "ListPaletteItems";
-            this.ListPaletteItems.Size = new System.Drawing.Size(196, 572);
-            this.ListPaletteItems.TabIndex = 5;
             this.ListPaletteItems.UseCompatibleStateImageBehavior = false;
             this.ListPaletteItems.View = System.Windows.Forms.View.Details;
             this.ListPaletteItems.DoubleClick += new System.EventHandler(this.ListPaletteItems_DoubleClick);
             // 
             // ColumnItemName
             // 
-            this.ColumnItemName.Width = 170;
+            resources.ApplyResources(this.ColumnItemName, "ColumnItemName");
             // 
             // BtnAddLongItem
             // 
-            this.BtnAddLongItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BtnAddLongItem.Location = new System.Drawing.Point(12, 605);
+            resources.ApplyResources(this.BtnAddLongItem, "BtnAddLongItem");
             this.BtnAddLongItem.Name = "BtnAddLongItem";
-            this.BtnAddLongItem.Size = new System.Drawing.Size(196, 24);
-            this.BtnAddLongItem.TabIndex = 6;
-            this.BtnAddLongItem.Text = "Add Long Item";
             this.BtnAddLongItem.UseVisualStyleBackColor = true;
             this.BtnAddLongItem.Click += new System.EventHandler(this.BtnAddLongItem_Click);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1196, 654);
             this.Controls.Add(this.BtnAddLongItem);
             this.Controls.Add(this.ListPaletteItems);
             this.Controls.Add(this.StatusStrip1);
             this.Controls.Add(this.ListReportItems);
             this.Controls.Add(this.MainMenuStrip1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "HID Report Descriptor Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.ContextMenuEdit.ResumeLayout(false);
             this.MainMenuStrip1.ResumeLayout(false);
@@ -492,13 +420,13 @@
         private System.Windows.Forms.ToolStripStatusLabel StatusBarSpring;
         private System.Windows.Forms.ToolStripStatusLabel StatusBarElementCount;
         private System.Windows.Forms.ToolStripStatusLabel StatusBarByteCount;
-        private System.Windows.Forms.ColumnHeader СolumnComment;
         private System.Windows.Forms.ToolStripSeparator SmHelpSeparator1;
         private System.Windows.Forms.ToolStripSeparator SmEditSeparator1;
         private System.Windows.Forms.ToolStripMenuItem SmEditMoveUp;
         private System.Windows.Forms.ToolStripMenuItem SmEditMoveDown;
         private System.Windows.Forms.ToolStripSeparator SmEditSeparator3;
         private System.Windows.Forms.Button BtnAddLongItem;
+        private System.Windows.Forms.ColumnHeader СolumnComment;
     }
 }
 
