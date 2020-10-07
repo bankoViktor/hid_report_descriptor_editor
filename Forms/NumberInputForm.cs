@@ -21,9 +21,12 @@ namespace HID_Report_Descriptor_Editor.Forms
             InitializeComponent();
             MinValue = min;
             MaxValue = max;
-            TbValue.Text = "0";
-            LabelRange.Text = string.Format(Resources.NumberInput_Range, MinValue, MaxValue);
             TbValue.Select();
+            TbValue.Text = "0";
+            // Localize
+            BtnOK.Text = Resources.AcceptButton;
+            BtnCancel.Text = Resources.CancelButton;
+            LabelRange.Text = string.Format(Resources.NumberInput_Range, MinValue, MaxValue);
         }
 
         private int? GetValue()
@@ -91,7 +94,7 @@ namespace HID_Report_Descriptor_Editor.Forms
                     return;
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 errorProvider1.SetError(TbValue, Resources.NumberInput_InvalidValue);
                 e.Cancel = true;

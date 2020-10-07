@@ -1,4 +1,5 @@
 ﻿using HID_Report_Descriptor_Editor.Enums;
+using HID_Report_Descriptor_Editor.Properties;
 using HID_Report_Descriptor_Editor.Utils;
 using System;
 using System.Data;
@@ -51,6 +52,15 @@ namespace HID_Report_Descriptor_Editor.Forms
             SelectUsagePageForm_Resize(null, EventArgs.Empty);
 
             ListUsagePages.Select();
+
+            ColumnHEX.DisplayIndex = 0;
+            ColumnName.DisplayIndex = 1;
+
+            // Localize
+            BtnOK.Text = Resources.AcceptButton;
+            BtnCancel.Text = Resources.CancelButton;
+            ColumnName.Text = Resources.UsagePageForm_ColumnName;
+            ColumnHEX.Text = Resources.UsagePageForm_ColumnHex;
         }
 
         private void SelectItem(object value)

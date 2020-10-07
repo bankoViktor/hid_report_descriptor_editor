@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using HID_Report_Descriptor_Editor.Properties;
+using System.Windows.Forms;
 
 namespace HID_Report_Descriptor_Editor.Forms
 {
@@ -13,6 +14,8 @@ namespace HID_Report_Descriptor_Editor.Forms
         public CmdArgsHelpForm()
         {
             InitializeComponent();
+            Text = Application.ProductName;
+            BtnOk.Text = Resources.AcceptButton;
         }
     }
 }

@@ -31,7 +31,7 @@
             this.BtnOK = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.ColTypePhysical = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GbCollections = new System.Windows.Forms.GroupBox();
             this.ColTypeVendorDefined = new System.Windows.Forms.RadioButton();
             this.ColTypeUsageModifier = new System.Windows.Forms.RadioButton();
             this.ColTypeUsageSwitch = new System.Windows.Forms.RadioButton();
@@ -39,7 +39,7 @@
             this.ColTypeReport = new System.Windows.Forms.RadioButton();
             this.ColTypeLogical = new System.Windows.Forms.RadioButton();
             this.ColTypeApplication = new System.Windows.Forms.RadioButton();
-            this.groupBox1.SuspendLayout();
+            this.GbCollections.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnOK
@@ -76,25 +76,25 @@
             this.ColTypePhysical.Text = "Physical";
             this.ColTypePhysical.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // GbCollections
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.GbCollections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.ColTypeVendorDefined);
-            this.groupBox1.Controls.Add(this.ColTypeUsageModifier);
-            this.groupBox1.Controls.Add(this.ColTypeUsageSwitch);
-            this.groupBox1.Controls.Add(this.ColTypeNamedArray);
-            this.groupBox1.Controls.Add(this.ColTypeReport);
-            this.groupBox1.Controls.Add(this.ColTypeLogical);
-            this.groupBox1.Controls.Add(this.ColTypeApplication);
-            this.groupBox1.Controls.Add(this.ColTypePhysical);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(288, 133);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Collection Type";
+            this.GbCollections.Controls.Add(this.ColTypeVendorDefined);
+            this.GbCollections.Controls.Add(this.ColTypeUsageModifier);
+            this.GbCollections.Controls.Add(this.ColTypeUsageSwitch);
+            this.GbCollections.Controls.Add(this.ColTypeNamedArray);
+            this.GbCollections.Controls.Add(this.ColTypeReport);
+            this.GbCollections.Controls.Add(this.ColTypeLogical);
+            this.GbCollections.Controls.Add(this.ColTypeApplication);
+            this.GbCollections.Controls.Add(this.ColTypePhysical);
+            this.GbCollections.Location = new System.Drawing.Point(12, 12);
+            this.GbCollections.Name = "GbCollections";
+            this.GbCollections.Size = new System.Drawing.Size(288, 133);
+            this.GbCollections.TabIndex = 2;
+            this.GbCollections.TabStop = false;
+            this.GbCollections.Text = "Collection Type";
             // 
             // ColTypeVendorDefined
             // 
@@ -173,7 +173,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(312, 186);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.GbCollections);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -182,8 +182,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Collection";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.GbCollections.ResumeLayout(false);
+            this.GbCollections.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -193,7 +193,7 @@
         private System.Windows.Forms.Button BtnOK;
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.RadioButton ColTypePhysical;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox GbCollections;
         private System.Windows.Forms.RadioButton ColTypeApplication;
         private System.Windows.Forms.RadioButton ColTypeReport;
         private System.Windows.Forms.RadioButton ColTypeLogical;

@@ -61,6 +61,51 @@ namespace HID_Report_Descriptor_Editor.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на About.
+        /// </summary>
+        internal static string AboutForm_Title {
+            get {
+                return ResourceManager.GetString("AboutForm_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Visit website.
+        /// </summary>
+        internal static string AboutForm_VisitWebButton {
+            get {
+                return ResourceManager.GetString("AboutForm_VisitWebButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на OK.
+        /// </summary>
+        internal static string AcceptButton {
+            get {
+                return ResourceManager.GetString("AcceptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Cancel.
+        /// </summary>
+        internal static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Clear.
+        /// </summary>
+        internal static string ClearButton {
+            get {
+                return ResourceManager.GetString("ClearButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Supported command line arguments:.
         /// </summary>
         internal static string CmdHintCaption {
@@ -93,6 +138,42 @@ namespace HID_Report_Descriptor_Editor.Properties {
         internal static string CmdHintLanguage {
             get {
                 return ResourceManager.GetString("CmdHintLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Collection Type:.
+        /// </summary>
+        internal static string CollectionForm_GroupBoxCollectionType {
+            get {
+                return ResourceManager.GetString("CollectionForm_GroupBoxCollectionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Comment.
+        /// </summary>
+        internal static string CommentForm_Title {
+            get {
+                return ResourceManager.GetString("CommentForm_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Close.
+        /// </summary>
+        internal static string DelimeterForm_Close {
+            get {
+                return ResourceManager.GetString("DelimeterForm_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Open.
+        /// </summary>
+        internal static string DelimeterForm_Open {
+            get {
+                return ResourceManager.GetString("DelimeterForm_Open", resourceCulture);
             }
         }
         
@@ -188,6 +269,24 @@ namespace HID_Report_Descriptor_Editor.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Help.
+        /// </summary>
+        internal static string HelpButton {
+            get {
+                return ResourceManager.GetString("HelpButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Memory Dump (hex):.
+        /// </summary>
+        internal static string HexEditorForm_Dump {
+            get {
+                return ResourceManager.GetString("HexEditorForm_Dump", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Invalid value.
         /// </summary>
         internal static string HexEditorForm_InvalidValue {
@@ -206,11 +305,38 @@ namespace HID_Report_Descriptor_Editor.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Long Tag (hex):.
+        /// </summary>
+        internal static string HexEditorForm_LongTag {
+            get {
+                return ResourceManager.GetString("HexEditorForm_LongTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Long Tag out of range: 0 to 255.
         /// </summary>
         internal static string HexEditorForm_LongTagOutOfRange {
             get {
                 return ResourceManager.GetString("HexEditorForm_LongTagOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Long Item Edit.
+        /// </summary>
+        internal static string HexEditorForm_Title {
+            get {
+                return ResourceManager.GetString("HexEditorForm_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Bit {0}.
+        /// </summary>
+        internal static string InputForm_BitNumber {
+            get {
+                return ResourceManager.GetString("InputForm_BitNumber", resourceCulture);
             }
         }
         
@@ -611,11 +737,56 @@ namespace HID_Report_Descriptor_Editor.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на HEX.
+        /// </summary>
+        internal static string UsageForm_ColumnHex {
+            get {
+                return ResourceManager.GetString("UsageForm_ColumnHex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Name.
+        /// </summary>
+        internal static string UsageForm_ColumnName {
+            get {
+                return ResourceManager.GetString("UsageForm_ColumnName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Type.
+        /// </summary>
+        internal static string UsageForm_ColumnType {
+            get {
+                return ResourceManager.GetString("UsageForm_ColumnType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на {0} from {1} (0x{2:X4}).
         /// </summary>
         internal static string UsageForm_SelectedUsagePage {
             get {
                 return ResourceManager.GetString("UsageForm_SelectedUsagePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на HEX.
+        /// </summary>
+        internal static string UsagePageForm_ColumnHex {
+            get {
+                return ResourceManager.GetString("UsagePageForm_ColumnHex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Name.
+        /// </summary>
+        internal static string UsagePageForm_ColumnName {
+            get {
+                return ResourceManager.GetString("UsagePageForm_ColumnName", resourceCulture);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using HID_Report_Descriptor_Editor.Utils;
+﻿using HID_Report_Descriptor_Editor.Properties;
+using HID_Report_Descriptor_Editor.Utils;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -30,6 +31,11 @@ namespace HID_Report_Descriptor_Editor.Forms
         public DelimeterForm()
         {
             InitializeComponent();
+            // Localize
+            BtnOK.Text = Resources.AcceptButton;
+            BtnCancel.Text = Resources.CancelButton;
+            RbDelimeterOpen.Text = Resources.DelimeterForm_Open;
+            RbDelimeterClose.Text = Resources.DelimeterForm_Close;
         }
     }
 }

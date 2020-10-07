@@ -1,5 +1,7 @@
 ﻿using HID_Report_Descriptor_Editor.Enums;
+using HID_Report_Descriptor_Editor.Properties;
 using HID_Report_Descriptor_Editor.Utils;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace HID_Report_Descriptor_Editor.Forms
@@ -77,6 +79,15 @@ namespace HID_Report_Descriptor_Editor.Forms
                     gb7.Enabled = false;
                     break;
             }
+
+            // Localize
+            BtnOK.Text = Resources.AcceptButton;
+            BtnCancel.Text = Resources.CancelButton;
+            var bitNumberName = Resources.InputForm_BitNumber;
+            Controls
+                .OfType<GroupBox>()
+                .ToList()
+                .ForEach(gb => gb.Text = string.Format(bitNumberName, gb.Tag as string));
         }
     }
 }

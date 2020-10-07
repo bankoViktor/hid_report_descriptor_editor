@@ -43,7 +43,7 @@
             // 
             this.BtnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.BtnOK.Location = new System.Drawing.Point(161, 95);
+            this.BtnOK.Location = new System.Drawing.Point(213, 95);
             this.BtnOK.Name = "BtnOK";
             this.BtnOK.Size = new System.Drawing.Size(84, 23);
             this.BtnOK.TabIndex = 0;
@@ -54,7 +54,7 @@
             // 
             this.BtnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtnCancel.Location = new System.Drawing.Point(251, 95);
+            this.BtnCancel.Location = new System.Drawing.Point(303, 95);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(84, 23);
             this.BtnCancel.TabIndex = 0;
@@ -66,7 +66,7 @@
             this.RbDEC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RbDEC.AutoSize = true;
             this.RbDEC.Checked = true;
-            this.RbDEC.Location = new System.Drawing.Point(288, 24);
+            this.RbDEC.Location = new System.Drawing.Point(340, 24);
             this.RbDEC.Name = "RbDEC";
             this.RbDEC.Size = new System.Drawing.Size(47, 19);
             this.RbDEC.TabIndex = 1;
@@ -79,7 +79,7 @@
             // 
             this.RbHEX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RbHEX.AutoSize = true;
-            this.RbHEX.Location = new System.Drawing.Point(288, 49);
+            this.RbHEX.Location = new System.Drawing.Point(340, 49);
             this.RbHEX.Name = "RbHEX";
             this.RbHEX.Size = new System.Drawing.Size(47, 19);
             this.RbHEX.TabIndex = 1;
@@ -89,11 +89,13 @@
             // 
             // TbValue
             // 
+            this.TbValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TbValue.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TbValue.Location = new System.Drawing.Point(12, 23);
             this.TbValue.MaxLength = 100;
             this.TbValue.Name = "TbValue";
-            this.TbValue.Size = new System.Drawing.Size(233, 23);
+            this.TbValue.Size = new System.Drawing.Size(280, 23);
             this.TbValue.TabIndex = 2;
             this.TbValue.WordWrap = false;
             this.TbValue.Validating += new System.ComponentModel.CancelEventHandler(this.TbValue_Validating);
@@ -117,7 +119,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtnCancel;
-            this.ClientSize = new System.Drawing.Size(347, 130);
+            this.ClientSize = new System.Drawing.Size(399, 130);
             this.Controls.Add(this.LabelRange);
             this.Controls.Add(this.TbValue);
             this.Controls.Add(this.RbHEX);

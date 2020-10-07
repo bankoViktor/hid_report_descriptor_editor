@@ -81,13 +81,11 @@
             // 
             // ColumnName
             // 
-            this.ColumnName.DisplayIndex = 1;
-            this.ColumnName.Text = "Название";
+            this.ColumnName.Text = "Name";
             this.ColumnName.Width = 200;
             // 
             // ColumnHEX
             // 
-            this.ColumnHEX.DisplayIndex = 0;
             this.ColumnHEX.Text = "HEX";
             // 
             // ColumnType
@@ -105,7 +103,7 @@
             this.BtnHelp.UseVisualStyleBackColor = true;
             this.BtnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
             // 
-            // SelectUsageForm
+            // UsageForm
             // 
             this.AcceptButton = this.BtnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -118,7 +116,7 @@
             this.Controls.Add(this.BtnOK);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "SelectUsageForm";
+            this.Name = "UsageForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

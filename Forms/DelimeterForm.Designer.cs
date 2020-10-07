@@ -92,6 +92,8 @@
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "DelimeterForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

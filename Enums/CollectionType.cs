@@ -2,7 +2,7 @@
 
 namespace HID_Report_Descriptor_Editor.Enums
 {
-    public enum CollectionType
+    public enum CollectionType : byte
     {
         [Description("Physical")]
         Physical = 0x00,

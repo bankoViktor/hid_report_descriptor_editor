@@ -1,5 +1,7 @@
 ﻿using HID_Report_Descriptor_Editor.Enums;
+using HID_Report_Descriptor_Editor.Properties;
 using HID_Report_Descriptor_Editor.Utils;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -11,7 +13,7 @@ namespace HID_Report_Descriptor_Editor.Forms
         {
             get
             {
-                return (CollectionType)groupBox1.Controls
+                return (CollectionType)GbCollections.Controls
                     .OfType<RadioButton>()
                     .First(rb => rb.Checked).Tag;
             }
@@ -19,9 +21,14 @@ namespace HID_Report_Descriptor_Editor.Forms
             {
                 if (value != null)
                 {
-                    groupBox1.Controls
+                    GbCollections.Controls
                        .OfType<RadioButton>()
-                       .Where(rb => (CollectionType)rb.Tag == (CollectionType)value)
+                       .Where(rb =>
+                       {
+                           var left = (CollectionType)Convert.ChangeType(rb.Tag, typeof(CollectionType));
+                           var right = (CollectionType)Convert.ToInt32(value);
+                           return left == right;
+                       })
                        .Single().Checked = true;
                 }
             }
@@ -38,6 +45,11 @@ namespace HID_Report_Descriptor_Editor.Forms
             ColTypeUsageSwitch.Tag = CollectionType.UsageSwitch;
             ColTypeUsageModifier.Tag = CollectionType.UsageModifier;
             ColTypeVendorDefined.Tag = CollectionType.VendorDefined;
+
+            // Localize
+            GbCollections.Text = Resources.CollectionForm_GroupBoxCollectionType;
+            BtnOK.Text = Resources.AcceptButton;
+            BtnCancel.Text = Resources.CancelButton;
         }
     }
 }

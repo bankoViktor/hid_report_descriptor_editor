@@ -113,6 +113,7 @@
             this.gb0.Size = new System.Drawing.Size(160, 80);
             this.gb0.TabIndex = 2;
             this.gb0.TabStop = false;
+            this.gb0.Tag = "0";
             this.gb0.Text = "Bit 0";
             // 
             // rb0_Constant
@@ -137,6 +138,7 @@
             this.gb1.Size = new System.Drawing.Size(160, 80);
             this.gb1.TabIndex = 3;
             this.gb1.TabStop = false;
+            this.gb1.Tag = "1";
             this.gb1.Text = "Bit 1";
             // 
             // rb1_Variable
@@ -174,6 +176,7 @@
             this.gb2.Size = new System.Drawing.Size(160, 80);
             this.gb2.TabIndex = 4;
             this.gb2.TabStop = false;
+            this.gb2.Tag = "2";
             this.gb2.Text = "Bit 2";
             // 
             // rb2_Relative
@@ -211,6 +214,7 @@
             this.gb3.Size = new System.Drawing.Size(160, 80);
             this.gb3.TabIndex = 5;
             this.gb3.TabStop = false;
+            this.gb3.Tag = "3";
             this.gb3.Text = "Bit 3";
             // 
             // rb3_Wrap
@@ -248,6 +252,7 @@
             this.gb4.Size = new System.Drawing.Size(160, 80);
             this.gb4.TabIndex = 6;
             this.gb4.TabStop = false;
+            this.gb4.Tag = "4";
             this.gb4.Text = "Bit 4";
             // 
             // rb4_NoLinear
@@ -285,6 +290,7 @@
             this.gb5.Size = new System.Drawing.Size(160, 80);
             this.gb5.TabIndex = 7;
             this.gb5.TabStop = false;
+            this.gb5.Tag = "5";
             this.gb5.Text = "Bit 5";
             // 
             // rb5_NoPreferred
@@ -322,6 +328,7 @@
             this.gb6.Size = new System.Drawing.Size(160, 80);
             this.gb6.TabIndex = 8;
             this.gb6.TabStop = false;
+            this.gb6.Tag = "6";
             this.gb6.Text = "Bit 6";
             // 
             // rb6_NullState
@@ -359,6 +366,7 @@
             this.gb7.Size = new System.Drawing.Size(160, 80);
             this.gb7.TabIndex = 9;
             this.gb7.TabStop = false;
+            this.gb7.Tag = "7";
             this.gb7.Text = "Bit 7";
             // 
             // rb7_Valatile
@@ -395,6 +403,7 @@
             this.gb8.Size = new System.Drawing.Size(160, 80);
             this.gb8.TabIndex = 10;
             this.gb8.TabStop = false;
+            this.gb8.Tag = "8";
             this.gb8.Text = "Bit 8";
             // 
             // rb8_Buffered

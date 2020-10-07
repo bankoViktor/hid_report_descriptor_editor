@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutForm_Title" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="AboutForm_VisitWebButton" xml:space="preserve">
+    <value>Посетить сайт</value>
+  </data>
+  <data name="AcceptButton" xml:space="preserve">
+    <value>ОК</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="ClearButton" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
   <data name="CmdHintCaption" xml:space="preserve">
     <value>Поддерживаемые аргументы командной строки:</value>
   </data>
@@ -128,6 +143,18 @@
   </data>
   <data name="CmdHintLanguage" xml:space="preserve">
     <value>Язык интерфейса приложения</value>
+  </data>
+  <data name="CollectionForm_GroupBoxCollectionType" xml:space="preserve">
+    <value>Тип коллекции:</value>
+  </data>
+  <data name="CommentForm_Title" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="DelimeterForm_Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="DelimeterForm_Open" xml:space="preserve">
+    <value>Открыть</value>
   </data>
   <data name="DialogOpenFile" xml:space="preserve">
     <value>Открыть файл</value>
@@ -158,14 +185,30 @@
     <value>Тип файла '{0}' не поддерживается.</value>
     <comment>0 - file extension</comment>
   </data>
+  <data name="HelpButton" xml:space="preserve">
+    <value>Помощь</value>
+  </data>
+  <data name="HexEditorForm_Dump" xml:space="preserve">
+    <value>Дамп (hex):</value>
+  </data>
   <data name="HexEditorForm_InvalidValue" xml:space="preserve">
     <value>Не верный формат</value>
   </data>
   <data name="HexEditorForm_LongDataSizeOutOfRange" xml:space="preserve">
     <value>Размер данных не должен превышать 255 байт</value>
   </data>
+  <data name="HexEditorForm_LongTag" xml:space="preserve">
+    <value>Тег (hex):</value>
+  </data>
   <data name="HexEditorForm_LongTagOutOfRange" xml:space="preserve">
     <value>Тег должен быть в диапазоне: 0 - 255 (0x00 - 0xFF)</value>
+  </data>
+  <data name="HexEditorForm_Title" xml:space="preserve">
+    <value>Редактор длинного элемента</value>
+  </data>
+  <data name="InputForm_BitNumber" xml:space="preserve">
+    <value>Бит {0}</value>
+    <comment>0 - bit number</comment>
   </data>
   <data name="MainForm_AddLongItem" xml:space="preserve">
     <value>Добавить длинный элемент</value>
@@ -305,8 +348,23 @@
   <data name="ShellOpen" xml:space="preserve">
     <value>Открыть</value>
   </data>
+  <data name="UsageForm_ColumnHex" xml:space="preserve">
+    <value>HEX</value>
+  </data>
+  <data name="UsageForm_ColumnName" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="UsageForm_ColumnType" xml:space="preserve">
+    <value>Тип</value>
+  </data>
   <data name="UsageForm_SelectedUsagePage" xml:space="preserve">
     <value>{0} из {1} (0x{2:X4})</value>
     <comment>0 - usage name, 1 - usage page name, 2 - usage page value</comment>
+  </data>
+  <data name="UsagePageForm_ColumnHex" xml:space="preserve">
+    <value>HEX</value>
+  </data>
+  <data name="UsagePageForm_ColumnName" xml:space="preserve">
+    <value>Название</value>
   </data>
 </root>

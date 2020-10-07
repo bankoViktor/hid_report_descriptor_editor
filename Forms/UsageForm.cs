@@ -1,4 +1,5 @@
 ﻿using HID_Report_Descriptor_Editor.Attributes;
+using HID_Report_Descriptor_Editor.Properties;
 using HID_Report_Descriptor_Editor.Utils;
 using System;
 using System.Data;
@@ -48,9 +49,20 @@ namespace HID_Report_Descriptor_Editor.Forms
                 })
                 .ToArray());
 
-            SelectUsageForm_Resize(null, EventArgs.Empty);
+            ColumnName.DisplayIndex = 0;
+            ColumnName.DisplayIndex = 1;
+            ColumnType.DisplayIndex = 2;
 
+            SelectUsageForm_Resize(null, EventArgs.Empty);
             ListUsages.Select();
+
+            // Localize
+            BtnOK.Text = Resources.AcceptButton;
+            BtnCancel.Text = Resources.CancelButton;
+            BtnHelp.Text = Resources.HelpButton;
+            ColumnName.Text = Resources.UsageForm_ColumnName;
+            ColumnHEX.Text = Resources.UsageForm_ColumnHex;
+            ColumnType.Text = Resources.UsageForm_ColumnType;
         }
 
         private void SeletItem(object value)

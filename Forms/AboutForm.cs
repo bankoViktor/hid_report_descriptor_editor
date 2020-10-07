@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using HID_Report_Descriptor_Editor.Properties;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace HID_Report_Descriptor_Editor.Forms
@@ -10,6 +11,11 @@ namespace HID_Report_Descriptor_Editor.Forms
             InitializeComponent();
             LabelProductName.Text = Application.ProductName;
             LabelProductVersion.Text = "v" + Application.ProductVersion;
+
+            // Localize
+            Text = Resources.AboutForm_Title;
+            BtnVisitWebSite.Text = Resources.AboutForm_VisitWebButton;
+            BtnOK.Text = Resources.AcceptButton;
         }
 
         private void BtnVisitWebSite_Click(object sender, System.EventArgs e)

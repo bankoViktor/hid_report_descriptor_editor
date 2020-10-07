@@ -30,6 +30,11 @@ namespace HID_Report_Descriptor_Editor.Forms
         public HexEditorForm()
         {
             InitializeComponent();
+            // Localize
+            BtnOK.Text = Resources.AcceptButton;
+            BtnCancel.Text = Resources.CancelButton;
+            LabelLongTag.Text = Resources.HexEditorForm_LongTag;
+            LabelDump.Text = Resources.HexEditorForm_Dump;
         }
 
         private void TbLongTag_Validating(object sender, CancelEventArgs e)
