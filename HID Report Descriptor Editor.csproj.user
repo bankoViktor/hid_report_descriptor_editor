@@ -4,7 +4,7 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>Run</ActiveDebugProfile>
+    <ActiveDebugProfile>Run File</ActiveDebugProfile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Controls\HexEditor.cs">

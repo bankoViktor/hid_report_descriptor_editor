@@ -13,7 +13,7 @@
     },
     "Run File": {
       "commandName": "Project",
-      "commandLineArgs": "\"test.hid\""
+      "commandLineArgs": "examples\\mouse.hid"
     },
     "Run Export": {
       "commandName": "Project",
