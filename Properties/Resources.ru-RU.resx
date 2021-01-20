@@ -266,6 +266,9 @@
   <data name="MainForm_MiEditPaste" xml:space="preserve">
     <value>Вставить</value>
   </data>
+  <data name="MainForm_MiEditSelectAll" xml:space="preserve">
+    <value>Выделить все</value>
+  </data>
   <data name="MainForm_MiFile" xml:space="preserve">
     <value>Файл</value>
   </data>

@@ -270,6 +270,9 @@
   <data name="MainForm_MiEditPaste" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="MainForm_MiEditSelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
   <data name="MainForm_MiFile" xml:space="preserve">
     <value>File</value>
   </data>

@@ -84,6 +84,7 @@ namespace HID_Report_Descriptor_Editor.Forms
             SmEditPaste.Text = Resources.MainForm_MiEditPaste;
             SmEditDelete.Text = Resources.MainForm_MiEditDelete;
             SmEditDeleteAll.Text = Resources.MainForm_MiEditDeleteAll;
+            SmEditSelectAll.Text = Resources.MainForm_MiEditSelectAll;
             SmEditMoveUp.Text = Resources.MainForm_MiEditMoveUp;
             SmEditMoveDown.Text = Resources.MainForm_MiEditMoveDown;
             SmView.Text = Resources.MainForm_MiView;

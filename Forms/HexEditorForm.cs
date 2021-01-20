@@ -31,6 +31,7 @@ namespace HID_Report_Descriptor_Editor.Forms
         {
             InitializeComponent();
             // Localize
+            Text = Resources.HexEditorForm_Title;
             BtnOK.Text = Resources.AcceptButton;
             BtnCancel.Text = Resources.CancelButton;
             LabelLongTag.Text = Resources.HexEditorForm_LongTag;

@@ -503,6 +503,15 @@ namespace HID_Report_Descriptor_Editor.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Select All.
+        /// </summary>
+        internal static string MainForm_MiEditSelectAll {
+            get {
+                return ResourceManager.GetString("MainForm_MiEditSelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на File.
         /// </summary>
         internal static string MainForm_MiFile {
