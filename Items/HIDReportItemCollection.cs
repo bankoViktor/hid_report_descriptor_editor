@@ -29,11 +29,6 @@ namespace HID_Report_Descriptor_Editor.Items
                 }
             }
 
-            if (openCount < 0)
-            {
-                throw new IndexOutOfRangeException();
-            }
-
             return openCount;
         }
 

@@ -41,9 +41,9 @@ namespace HID_Report_Descriptor_Editor.Items
             return bytes.Concat(Value as byte[]).ToArray();
         }
 
-        public override string ToString(HIDReportItemCollection reportItems)
+        public override string ToString(HIDReportItemCollection reportItems, out int openCollectionCount)
         {
-            var fmt = base.ToString(reportItems);
+            var fmt = base.ToString(reportItems, out openCollectionCount);
             var size = Value != null && Value is byte[] bytes ? (byte)bytes.Length : 0;
             return string.Format(fmt, LongItemTag) + $" [{size} bytes]";
         }

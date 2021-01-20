@@ -56,10 +56,10 @@ namespace HID_Report_Descriptor_Editor.Items
         public string Comment { get; set; }
 
 
-        public virtual string ToString(HIDReportItemCollection reportItems)
+        public virtual string ToString(HIDReportItemCollection reportItems, out int openCollectionCount)
         {
             var index = reportItems.IndexOf(this);
-            var openCollectionCount = reportItems.GetOpenCollectionCount(index);
+            openCollectionCount = reportItems.GetOpenCollectionCount(index);
 
             var _value = $"0x{Value:X}";
 
@@ -92,8 +92,6 @@ namespace HID_Report_Descriptor_Editor.Items
                     switch ((ItemTagGlobal)Header.Tag)
                     {
                         case ItemTagGlobal.UsagePage:
-                            // !!! нужно передать типизированное значение
-                            //var typedValue  = Convert.ChangeType(Value, typeof(UsagePage));
                             var typedValue = Enum.ToObject(typeof(UsagePage), Value);
                             _value = EnumHelper.GetEnumDescription(typedValue);
                             break;

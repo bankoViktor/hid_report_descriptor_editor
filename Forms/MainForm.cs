@@ -4,6 +4,7 @@ using HID_Report_Descriptor_Editor.Items;
 using HID_Report_Descriptor_Editor.Properties;
 using HID_Report_Descriptor_Editor.Utils;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -330,13 +331,19 @@ namespace HID_Report_Descriptor_Editor.Forms
             ListReportItems.Items.AddRange(ReportItems
                 .Select(item => new ListViewItem(new ListViewSubItem[]
                 {
-                    new ListViewSubItem(null, item.ToString(ReportItems)),
+                    new ListViewSubItem(null, item.ToString(ReportItems, out int openCollectionCount)),
                     new ListViewSubItem(null, item.BytesString) { ForeColor = NumberColor },
                     new ListViewSubItem(null, !string.IsNullOrWhiteSpace(item.Comment)
                         ? $"; {item.Comment}"
                         : string.Empty) { ForeColor = CommentColor },
                 }, -1)
-                { Tag = item, UseItemStyleForSubItems = false })
+                { 
+                    Tag = item, 
+                    UseItemStyleForSubItems = false, 
+                    BackColor = item.Header.Type == ItemType.Main && 
+                        ((ItemTagMain)item.Header.Tag == ItemTagMain.EndCollection || (ItemTagMain)item.Header.Tag == ItemTagMain.Collection) &&
+                        openCollectionCount < 0 ? Color.IndianRed : Color.Transparent  
+                })
                 .ToArray());
 
             // Востанавливаем выделенные элементы
@@ -372,10 +379,12 @@ namespace HID_Report_Descriptor_Editor.Forms
             SmEditComment.Enabled = isSelMoreOne;
             SmEditCut.Enabled = isSelMoreOne;
             SmEditCopy.Enabled = isSelMoreOne;
-            SmEditPaste.Enabled = true; // TODO имеется вырезанные/скопированные элементы
+            SmEditPaste.Enabled = Clipboard.ContainsData(nameof(HIDReportItemCollection));
             SmEditDelete.Enabled = isSelMoreOne;
             SmEditDeleteAll.Enabled = isHasMoreOne;
             SmEditSelectAll.Enabled = isHasMoreOne;
+            SmEditMoveUp.Enabled = isHasMoreOne;
+            SmEditMoveDown.Enabled = isHasMoreOne;
             // View
             SmViewStatusBar.Checked = isHasMoreOne;
             SmViewReportScheme.Checked = false; // TODO доделать структуру репорта
@@ -390,6 +399,24 @@ namespace HID_Report_Descriptor_Editor.Forms
             {
                 CreateNoWindow = true
             });
+        }
+
+        private void CopyToClipboard(IEnumerable<HIDReportItem> items)
+        {
+            var collection = new HIDReportItemCollection();
+            collection.AddRange(items);
+
+            using var stringWriter = new StringWriter();
+            Serializer.Serialize(stringWriter, collection);
+            Clipboard.SetData(nameof(HIDReportItemCollection), stringWriter.ToString());
+        }
+
+        private void DeleteItems(IEnumerable<HIDReportItem> items)
+        {
+            foreach (var item in items)
+            {
+                ReportItems.Remove(item);
+            }
         }
 
         #region Events
@@ -492,6 +519,11 @@ namespace HID_Report_Descriptor_Editor.Forms
             UpdateListView();
         }
 
+        private void ContextMenuEdit_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            EnableUpdate();
+        }
+
         #endregion
 
         #region Commands
@@ -567,17 +599,79 @@ namespace HID_Report_Descriptor_Editor.Forms
             }
         }
 
+        private void SmEditCopy_Click(object sender, EventArgs e)
+        {
+            if (ListReportItems.SelectedItems.Count == 0)
+            {
+                Clipboard.Clear();
+                return;
+            }
+
+            var selected = ListReportItems.SelectedItems
+                .Cast<ListViewItem>()
+                .Select(lvi => lvi.Tag as HIDReportItem)
+                .ToArray();
+
+            CopyToClipboard(selected);
+            EnableUpdate();
+        }
+
+        private void SmEditCut_Click(object sender, EventArgs e)
+        {
+            if (ListReportItems.SelectedItems.Count == 0)
+            {
+                Clipboard.Clear();
+                return;
+            }
+
+            var selected = ListReportItems.SelectedItems
+                .Cast<ListViewItem>()
+                .Select(lvi => lvi.Tag as HIDReportItem);
+
+            CopyToClipboard(selected);
+
+            DeleteItems(selected);
+
+            IsModified = true;
+            UpdateListView();
+        }
+
+        private void SmEditPaste_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsData(nameof(HIDReportItemCollection)))
+            {
+                var data = Clipboard.GetData(nameof(HIDReportItemCollection)) as string;
+                using var textReader = new StringReader(data);
+                var collection = Serializer.Deserialize(textReader) as HIDReportItemCollection;
+                var maxIndexPos = ListReportItems.SelectedItems.Count == 0
+                    ? ListReportItems.Items.Count
+                    : ListReportItems.SelectedItems.Cast<ListViewItem>().DefaultIfEmpty().Max(lvi => lvi.Index);
+                ReportItems.InsertRange(maxIndexPos, collection);
+                IsModified = true;
+                UpdateListView();
+            }
+        }
+
+        private void SmEditMoveUp_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Resources.NotImplemented, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error); // Move Up
+        }
+
+        private void SmEditMoveDown_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Resources.NotImplemented, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error); // Move Down
+        }
+
         private void SmEditDelete_Click(object sender, EventArgs e)
         {
-            UpdateListView();
-
             if (ListReportItems.SelectedItems.Count > 0)
             {
-                foreach (ListViewItem lvi in ListReportItems.SelectedItems)
-                {
-                    var reportItems = lvi.Tag as ShortItem;
-                    ReportItems.Remove(reportItems);
-                }
+                var selected = ListReportItems.SelectedItems
+                    .Cast<ListViewItem>()
+                    .Select(lvi => lvi.Tag as HIDReportItem);
+
+                DeleteItems(selected);
+
                 IsModified = true;
                 UpdateListView();
             }

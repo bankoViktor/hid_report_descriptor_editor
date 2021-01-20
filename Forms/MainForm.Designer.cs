@@ -122,6 +122,7 @@
             this.SmEditDeleteAll});
             this.ContextMenuEdit.Name = "ContextMenuStrip";
             resources.ApplyResources(this.ContextMenuEdit, "ContextMenuEdit");
+            this.ContextMenuEdit.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuEdit_Opening);
             // 
             // SmEditComment
             // 
@@ -138,16 +139,19 @@
             // 
             this.SmEditCut.Name = "SmEditCut";
             resources.ApplyResources(this.SmEditCut, "SmEditCut");
+            this.SmEditCut.Click += new System.EventHandler(this.SmEditCut_Click);
             // 
             // SmEditCopy
             // 
             this.SmEditCopy.Name = "SmEditCopy";
             resources.ApplyResources(this.SmEditCopy, "SmEditCopy");
+            this.SmEditCopy.Click += new System.EventHandler(this.SmEditCopy_Click);
             // 
             // SmEditPaste
             // 
             this.SmEditPaste.Name = "SmEditPaste";
             resources.ApplyResources(this.SmEditPaste, "SmEditPaste");
+            this.SmEditPaste.Click += new System.EventHandler(this.SmEditPaste_Click);
             // 
             // SmEditDelete
             // 
@@ -164,11 +168,13 @@
             // 
             this.SmEditMoveUp.Name = "SmEditMoveUp";
             resources.ApplyResources(this.SmEditMoveUp, "SmEditMoveUp");
+            this.SmEditMoveUp.Click += new System.EventHandler(this.SmEditMoveUp_Click);
             // 
             // SmEditMoveDown
             // 
             this.SmEditMoveDown.Name = "SmEditMoveDown";
             resources.ApplyResources(this.SmEditMoveDown, "SmEditMoveDown");
+            this.SmEditMoveDown.Click += new System.EventHandler(this.SmEditMoveDown_Click);
             // 
             // SmEditSeparator3
             // 
