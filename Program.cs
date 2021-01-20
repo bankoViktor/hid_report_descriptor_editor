@@ -1,9 +1,12 @@
 using HID_Report_Descriptor_Editor.Forms;
 using HID_Report_Descriptor_Editor.Items;
 using HID_Report_Descriptor_Editor.Properties;
+using HID_Report_Descriptor_Editor.Utils;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -36,22 +39,28 @@ namespace HID_Report_Descriptor_Editor
             {
                 if (args.Where(s => s[0] == '-' && s[1] == '-').Count() == 0)
                 {
-                    var filename = args[0];
+                    var filename = Path.GetFullPath(args[0]);
                     if (IsFileValid(filename))
-                        Application.Run(new MainForm(filename));
+                    {
+                        // Открытый ранее
+                        if (!IsFileOpenBefore(filename))
+                        {
+                            Application.Run(new MainForm(filename));
+                        }
+                    }
                 }
                 else
                 {
                     var pos = -1;
                     if (CheckParam(args, "h", "help", out pos) || CheckParam(args, "help", out pos, null))
                     {
-                        var fmt = "{0,6} {1} | {2,-10} {3}\r\n";
+                        var fmt = "{0} {1} | {2,-20} {3}\r\n";
                         var builder = new StringBuilder();
                         builder.AppendLine(Resources.CmdHintCaption);
                         builder.AppendLine();
                         builder.AppendFormat(fmt, CmdLinePrefix, "h", "help", Resources.CmdHintHelp);
-                        builder.AppendFormat(fmt, CmdLinePrefix, "l", "language", Resources.CmdHintLanguage);
-                        builder.AppendFormat(fmt, CmdLinePrefix, "e", "export", Resources.CmdHintExport);
+                        builder.AppendFormat(fmt, CmdLinePrefix, "l", "language <locale>", Resources.CmdHintLanguage);
+                        builder.AppendFormat(fmt, CmdLinePrefix, "e", "export <hid> <h>", Resources.CmdHintExport);
                         var dlg = new CmdArgsHelpForm()
                         {
                             Text = Application.ProductName,
@@ -77,34 +86,65 @@ namespace HID_Report_Descriptor_Editor
                     }
                     else if (CheckParam(args, "e", "export", out pos))
                     {
-                        try
-                        {
-                            var hidFile = args[pos + 1];
-                            var hdrFile = args[pos + 2];
+                        var hidFile = args[pos + 1];
+                        var hdrFile = args[pos + 2];
 
-                            if (IsFileValid(hidFile))
-                            {
-                                var ext = Path.GetExtension(hdrFile);
-                                if (ext == ".h" || ext == ".hpp")
-                                {
-                                    var reportItems = MainForm.Open(hidFile);
-                                    Export(reportItems, hdrFile);
-                                }
-                                else
-                                    MessageBox.Show(string.Format(Resources.FileTypeNotSupported, ext), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                        catch (Exception)
+                        if (IsFileValid(hidFile))
                         {
-                            // TODO Not defined hid file
-                            MessageBox.Show("Not defined hid file and/or header file.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            var reportItems = MainForm.Open(hidFile);
+                            Export(reportItems, hdrFile);
                         }
                     }
                 }
             }
         }
 
-        static bool IsFileValid(string filename)
+        private static bool IsFileOpenBefore(string filename)
+        {
+            var exePath = Process.GetCurrentProcess().MainModule.FileName.ToLower();
+            var pid = Process.GetCurrentProcess().Id;
+            var targetProcess = Process.GetProcesses().Where(p =>
+            {
+                try
+                {
+                    if (p.Id != pid && p.MainModule.FileName.ToLower() == exePath)
+                    {
+                        var title = p.MainWindowTitle;
+                        if (!string.IsNullOrWhiteSpace(title))
+                        {
+                            var begin = title.IndexOf('[');
+                            if (begin > -1)
+                            {
+                                var end = title.IndexOf(']');
+                                if (begin > -1)
+                                {
+                                    var filePath = title[++begin..end];
+                                    return filename.ToLower() == filePath.ToLower();
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                }
+                return false;
+            }).SingleOrDefault();
+
+            if (targetProcess == null)
+            {
+                return false;
+            }
+
+            // TODO разворачивать свернутые окна
+            //NativeMethods.FlashWindow(targetProcess.MainWindowHandle, false);
+            NativeMethods.SetForegroundWindow(targetProcess.MainWindowHandle);
+            SystemSounds.Asterisk.Play();
+
+            return true;
+        }
+
+        private static bool IsFileValid(string filename)
         {
             if (File.Exists(filename))
             {
@@ -122,12 +162,12 @@ namespace HID_Report_Descriptor_Editor
             return false;
         }
 
-        static bool CheckParam(string[] args, string longName, out int position, string key = CmdLinePrefix)
+        private static bool CheckParam(string[] args, string longName, out int position, string key = CmdLinePrefix)
         {
             return CheckParam(args, null, longName, out position, key);
         }
 
-        static bool CheckParam(string[] args, string shortName, string longName, out int position, string key = CmdLinePrefix)
+        private static bool CheckParam(string[] args, string shortName, string longName, out int position, string key = CmdLinePrefix)
         {
             if (key == null)
             {
