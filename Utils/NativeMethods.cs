@@ -276,5 +276,25 @@ namespace HID_Report_Descriptor_Editor.Utils
         [DllImport("shell32.dll")]
         public static extern void SHChangeNotify(HChangeNotifyEventID wEventId,
             HChangeNotifyFlags uFlags, IntPtr dwItem1, IntPtr dwItem2);
+
+        /// <summary>
+        /// Flashes the specified window one time. It does not change the active state of the window.
+        /// </summary>
+        /// <param name="hWnd">A handle to the window to be flashed. The window can be either open or minimized.</param>
+        /// <param name="bInvert">If this parameter is <see cref="true"/>, the window is flashed from one state to the other. If it 
+        /// is <see cref="false"/>, the window is returned to its original state (either active or inactive).</param>
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool FlashWindow(IntPtr hWnd, bool bInvert);
+
+        /// <summary>
+        /// Brings the thread that created the specified window into the foreground and activates the window. Keyboard input is 
+        /// directed to the window, and various visual cues are changed for the user. The system assigns a slightly higher priority 
+        /// to the thread that created the foreground window than it does to other threads.
+        /// </summary>
+        /// <param name="hWnd">A handle to the window that should be activated and brought to the foreground.</param>
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
     }
 }
